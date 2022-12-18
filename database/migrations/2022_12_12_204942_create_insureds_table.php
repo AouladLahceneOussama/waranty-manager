@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('assure_principales', function (Blueprint $table) {
+        Schema::create('insureds', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('folder_id');
             $table->string('nom')->nullable();
@@ -43,6 +43,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('assure_principales');
+        Schema::dropIfExists('insureds');
     }
 };

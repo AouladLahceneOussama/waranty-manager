@@ -17,12 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])->group(function () {
+    Route::get('/dashboard', fn () => view('dashboard'))->name('dashboard');
+    Route::get('/clients', fn () => view('client.index'))->name('client.index');
+
+    // Folders routes
+    Route::get('/folders', fn () => view('folder.index'))->name('folder.index');
+    Route::get('/folders/create', fn () => view('folder.create'))->name('folder.create');
 });

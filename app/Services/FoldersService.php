@@ -2,13 +2,17 @@
 
 namespace App\Services;
 
+use App\Models\Appointement;
+use App\Models\Comment;
 use App\Models\Folder;
+use App\Models\Insured;
+use App\Models\Media;
 
 class FoldersService {
 
-    public static function getAll(int $limits)
+    public static function getAll(array $options)
     {
-        $folders = Folder::paginate($limits);
+        $folders = Folder::orderBy($options["orderBy"], $options["orderDirection"])->paginate($options["limit"]);
         return $folders;
     }
 
@@ -57,6 +61,10 @@ class FoldersService {
         $folder = Folder::find($folder_id);
         if(!$folder) return false;
         
+        Insured::where("folder_id", $folder_id)->delete();
+        Appointement::where("folder_id", $folder_id)->delete();
+        Media::where("folder_id", $folder_id)->delete();
+        Comment::where("folder_id", $folder_id)->delete();
         $folder->delete();
         return true;
     }

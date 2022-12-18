@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('folders', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string("compagnie");
-            $table->float("cotisation_ht");
-            $table->float("cotisation_ttc");
-            $table->date("date_effet");
-            $table->string("souscripteur");
-            $table->string("status")->default("INCOMPLET");
+            $table->unsignedBigInteger('folder_id');
+            $table->text('comment');
+            $table->string('status')->default('IMPORTANT');
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('folders');
+        Schema::dropIfExists('comments');
     }
 };
