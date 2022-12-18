@@ -72,8 +72,8 @@
             <td class="p-2 align-middle whitespace-nowrap">
                 <span class="font-semibold leading-tight text-xs text-slate-700">{{ $folder->date_effet }}</span>
             </td>
-            <td class="p-2 text-center align-middle whitespace-nowrap "> <br>
-                <span class="font-semibold leading-tight text-xs text-slate-700">{{ $folder->cotisation_ht."HT"}}{{  }}.$folder->cotisation_ttc."TTC" }}</span>
+            <td class="p-2 text-center align-middle whitespace-nowrap "> 
+                <span class="font-semibold leading-tight text-xs text-slate-700">{{ $folder->cotisation_ht." HT"}}<br>{{$folder->cotisation_ttc." TTC" }}</span>
             </td>
             {{-- <td class="p-2 text-center align-middle whitespace-nowrap ">
                 <span class="font-semibold leading-tight text-xs text-slate-700">{{ $folder->cotisation_ttc }}</span>
