@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Appointement;
 use App\Models\Folder;
+use Carbon\Carbon;
 
 class AppointementsService {
 
@@ -43,5 +44,11 @@ class AppointementsService {
         
         $appointment->delete();
         return true;
+    }
+
+    public static function closeAppointements()
+    {
+        $appointments = Appointement::whereBetween('date', [Carbon::now()->subDays(3)->toDateString(), Carbon::now()->toDateString()]);
+        return $appointments;
     }
 }

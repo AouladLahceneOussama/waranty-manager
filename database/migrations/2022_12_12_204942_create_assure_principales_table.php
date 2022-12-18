@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('civilite')->nullable();
             $table->string('code_organisme')->nullable();
             $table->string('etat_civil')->nullable();
-            $table->string('numero_securite_social')->nullable();
+            $table->string('code_securite_social')->nullable();
             $table->string('iban')->nullable();
             $table->date('jour_prelevement')->nullable();
             $table->string("type");

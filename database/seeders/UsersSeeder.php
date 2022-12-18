@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Folder;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class FoldersSeeder extends Seeder
+class UsersSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +15,6 @@ class FoldersSeeder extends Seeder
      */
     public function run()
     {
-        Folder::factory()->count(50)->create();
+        User::factory()->count(2)->create();
     }
 }
