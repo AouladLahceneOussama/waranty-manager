@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('media', function (Blueprint $table) {
+        Schema::create('medias', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('folder_id');
             $table->string('identifier');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('media');
+        Schema::dropIfExists('medias');
     }
 };
