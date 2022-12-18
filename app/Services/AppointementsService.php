@@ -13,10 +13,10 @@ class AppointementsService {
         return $folder->appointements();
     }
     
-    public static function create(array $data)
+    public static function create(array $data, int $folder_id)
     {
         $appointment = new Appointement();
-        $appointment->folder_id = $data["folder_id"];
+        $appointment->folder_id = $folder_id;
         $appointment->name = $data["name"];
         $appointment->date = $data["date"];
         $appointment->save();
