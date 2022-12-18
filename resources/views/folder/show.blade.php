@@ -36,13 +36,13 @@
                 @include('components.sort-icons', ['name' => 'date_effet'])
             </th>
             <th wire:click="sortBy('cotisation_ht')" class="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 hover:opacity-100 cursor-pointer transition ease-in-out duration-300">
-                Cotisation HT
+                Cotisation
                 @include('components.sort-icons', ['name' => 'cotisation_ht'])
             </th>
-            <th wire:click="sortBy('cotisation_ttc')" class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 hover:opacity-100 cursor-pointer transition ease-in-out duration-300">
+            {{-- <th wire:click="sortBy('cotisation_ttc')" class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 hover:opacity-100 cursor-pointer transition ease-in-out duration-300">
                 Cotisation TTC
                 @include('components.sort-icons', ['name' => 'cotisation_ttc'])
-            </th>
+            </th> --}}
             <th wire:click="sortBy('user_id')" class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 hover:opacity-100 cursor-pointer transition ease-in-out duration-300">
                 Ajoute par
                 @include('components.sort-icons', ['name' => 'user_id'])
@@ -72,12 +72,12 @@
             <td class="p-2 align-middle whitespace-nowrap">
                 <span class="font-semibold leading-tight text-xs text-slate-700">{{ $folder->date_effet }}</span>
             </td>
-            <td class="p-2 text-center align-middle whitespace-nowrap ">
-                <span class="font-semibold leading-tight text-xs text-slate-700">{{ $folder->cotisation_ht }}</span>
+            <td class="p-2 text-center align-middle whitespace-nowrap "> 
+                <span class="font-semibold leading-tight text-xs text-slate-700">{{ $folder->cotisation_ht." HT"}}<br>{{$folder->cotisation_ttc." TTC" }}</span>
             </td>
-            <td class="p-2 text-center align-middle whitespace-nowrap ">
+            {{-- <td class="p-2 text-center align-middle whitespace-nowrap ">
                 <span class="font-semibold leading-tight text-xs text-slate-700">{{ $folder->cotisation_ttc }}</span>
-            </td>
+            </td> --}}
             
             <td class="p-2 text-center align-middle whitespace-nowrap">
                 <span class="font-semibold leading-tight text-xs text-slate-700">{{ $folder->user->name }}</span>
