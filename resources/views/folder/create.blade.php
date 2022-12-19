@@ -5,9 +5,9 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12 bg-[url('https://www.looknbe.com/wp-content/uploads/2021/10/assurance-sante.jpg')] bg-no-repeat bg-cover bg-center bg-fixed">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="bg-white  bg-opacity-70  overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="mb-4">
                     @livewire('folder.form')
                 </div>
