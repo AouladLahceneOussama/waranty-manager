@@ -651,10 +651,11 @@ function app() {
 
         </div>
 
-    </form>
-
-    <button wire:click.prevent="create"
+        <button wire:click.prevent="create"
         class="px-8 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-600 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
         {{ __('Enregistrer') }}
     </button>
+    </form>
+
+   
 </div>
