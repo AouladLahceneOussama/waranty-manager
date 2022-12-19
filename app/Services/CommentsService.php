@@ -13,11 +13,11 @@ class CommentsService {
         return $folder->comments();
     }
     
-    public static function create(array $data)
+    public static function create(array $data, int $folder_id)
     {
         $comment = new Comment();
         $comment->user_id = Auth::id();
-        $comment->folder_id = $data["folder_id"];
+        $comment->folder_id = $folder_id;
         $comment->message = $data["message"];
         $comment->save();
 
