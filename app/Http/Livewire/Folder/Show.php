@@ -72,13 +72,13 @@ class Show extends Component
     public function applyFilter()
     {
         $this->validate();
-
+        $this->filterQuery = "";
         $this->filters["date_effet"] = !isset($this->filters["date_effet_start"]) ? null : $this->filters["date_effet_start"] . ',' . $this->filters["date_effet_end"];
         unset($this->filters["date_effet_start"], $this->filters["date_effet_end"]);
 
         foreach ($this->filters as $filter => $value) {
             if ($value == null) continue;
-            $this->filterQuery .= strtoupper($filter) . '::' . $value . ',';
+            $this->filterQuery .= strtoupper($filter) . '::' . urlencode($value) . ',';
         }
 
         $this->filterQuery = substr($this->filterQuery, 0, -1);

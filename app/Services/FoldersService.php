@@ -85,13 +85,13 @@ class FoldersService
     public static function search(string $query, array $options)
     {
         // $query = DATE_EFFET::date1,date2,COMPAGNIE::samsung,PHONE::34130320932,EMAIL::asdasd@test.com,NUMERO_ADHERATION::isjfdaisjd
-        $folders = Folder::latest();
+        $folders = Folder::query();
         $queries = explode(",", $query);
 
         foreach ($queries as $q) {
             $search = explode("::", $q);
             $column = $search[0];
-            $value = $search[1];
+            $value = urldecode($search[1]);
 
             switch ($column) {
                 case "DATE_EFFET":
@@ -103,17 +103,17 @@ class FoldersService
                     break;
 
                 case "PHONE":
-                    $folders = $folders->join('insureds', function ($join) use($value){
-                        $join->on('folders.id', '=', 'insureds.folder_id')
-                             ->where('insureds.primary_phone', 'LIKE', "%$value%")
-                             ->orWhere('insureds.secondary_phone', 'LIKE', "%$value%");
+                    $folders = $folders->join('insureds as i1', function ($join) use($value){
+                        $join->on('folders.id', '=', 'i1.folder_id')
+                             ->where('i1.primary_phone', 'LIKE', "%$value%")
+                             ->orWhere('i1.secondary_phone', 'LIKE', "%$value%");
                     });
                     break;
 
                 case "EMAIL":
-                    $folders = $folders->join('insureds', function ($join) use($value){
-                        $join->on('folders.id', '=', 'insureds.folder_id')
-                             ->where('insureds.email', 'LIKE', "%$value%");
+                    $folders = $folders->join('insureds as i2', function ($join) use($value){
+                        $join->on('folders.id', '=', 'i2.folder_id')
+                             ->where('i2.email', 'LIKE', "%$value%");
                     });
                     break;
 
@@ -126,7 +126,7 @@ class FoldersService
             }
         }
 
-        $folders = Folder::orderBy($options["orderBy"], $options["orderDirection"])->paginate($options["limit"]);
+        $folders =  $folders->orderBy('folders.'.$options["orderBy"], $options["orderDirection"])->paginate($options["limit"]);
         return $folders;
     }
 }
