@@ -29,7 +29,7 @@ class Show extends Component
         "filters.numero_adheration" => "nullable|string",
         "filters.email" => "nullable|email",
         "filters.date_effet_start" => "nullable|date",
-        "filters.date_effet_end" => "nullable|required_with:date_effet_start|date|gt:date_effet_start",
+        "filters.date_effet_end" => "nullable|required_with:date_effet_start|date|after_or_equal:date_effet_start",
     ];
 
     public function sortBy($column)
@@ -74,7 +74,6 @@ class Show extends Component
         $this->validate();
         $this->filterQuery = "";
         $this->filters["date_effet"] = !isset($this->filters["date_effet_start"]) ? null : $this->filters["date_effet_start"] . ',' . $this->filters["date_effet_end"];
-        unset($this->filters["date_effet_start"], $this->filters["date_effet_end"]);
 
         foreach ($this->filters as $filter => $value) {
             if ($value == null) continue;

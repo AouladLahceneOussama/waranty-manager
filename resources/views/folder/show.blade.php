@@ -6,7 +6,7 @@
                     <label for="Compagnie" class="mb-1 block text-xs font-medium">
                         Compagnie
                     </label>
-                    <input wire:model.lazy="filters.compagnie" type="text" id="Compagnie" placeholder="Nom de compagnie" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" />
+                    <input wire:model.defer="filters.compagnie" type="text" id="Compagnie" placeholder="Nom de compagnie" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" />
                     @error('filters.compagnie') <span class="text-xs text-red-500 py-1">{{ $message }}</span> @enderror
                 </div>
 
@@ -14,7 +14,7 @@
                     <label for="numero_adheration" class="mb-1 block text-xs font-medium">
                         Numero D'adheration
                     </label>
-                    <input type="text" wire:model.lazy="filters.numero_adheration" id="numero_adheration" placeholder="Numero ou Code d'adheration" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" />
+                    <input type="text" wire:model.defer="filters.numero_adheration" id="numero_adheration" placeholder="Numero ou Code d'adheration" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" />
                     @error('filters.numero_adheration') <span class="text-xs text-red-500 py-1">{{ $message }}</span> @enderror
 
                 </div>
@@ -23,7 +23,7 @@
                     <label for="phone" class="mb-1 block text-xs font-medium">
                         Telephone
                     </label>
-                    <input type="text" wire:model.lazy="filters.phone" id="phone" placeholder="Numero telephone de client" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" />
+                    <input type="text" wire:model.defer="filters.phone" id="phone" placeholder="Numero telephone de client" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" />
                     @error('filters.phone') <span class="text-xs text-red-500 py-1">{{ $message }}</span> @enderror
 
                 </div>
@@ -32,7 +32,7 @@
                     <label for="email" class="mb-1 block text-xs font-medium">
                         Email
                     </label>
-                    <input type="email" wire:model.lazy="filters.email" id="email" placeholder="Email de client" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" />
+                    <input type="email" wire:model.defer="filters.email" id="email" placeholder="Email de client" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" />
                     @error('filters.email') <span class="text-xs text-red-500 py-1">{{ $message }}</span> @enderror
 
                 </div>
@@ -48,13 +48,13 @@
             <div class="-mx-3 flex flex-wrap">
                 <div class="w-full px-0 sm:px-3 py-2 sm:py-0 sm:w-3/4">
                     <div class="flex justify-center items-center space-x-2">
-                        <div class="w-full">
-                            <input type="date" wire:model.lazy="filters.date_effet_start" id="date_effet_start" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" />
+                        <div class="w-full" >
+                            <input type="date" wire:model.defer="filters.date_effet_start" id="date_effet_start" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" />
                             @error('filters.date_effet_start') <span class="text-xs text-red-500 py-1">{{ $message }}</span> @enderror
                         </div>
                         <span class="text-xs">à</span>
                         <div class="w-full">
-                            <input type="date" wire:model.lazy="filters.date_effet_end" id="date_effet_end" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" />
+                            <input type="date" wire:model.defer="filters.date_effet_end" id="date_effet_end" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" />
                             @error('filters.date_effet_end') <span class="text-xs text-red-500 py-1">{{ $message }}</span> @enderror
                         </div>
 

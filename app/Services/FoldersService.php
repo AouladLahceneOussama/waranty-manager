@@ -95,7 +95,7 @@ class FoldersService
 
             switch ($column) {
                 case "DATE_EFFET":
-                    $folders = $folders->whereBetween(strtolower($column), [$value]);
+                    $folders = $folders->whereBetween(strtolower($column), explode(",", $value));
                     break;
 
                 case "COMPAGNIE":
