@@ -14,6 +14,23 @@ class Show extends Component
     public $column = "created_at";
     public $sortDesc = true;
     public $query = '';
+    public $filterQuery = "";
+    public $filters = [
+        "compagnie" => null,
+        "numero_adheration" => null,
+        "phone" => null,
+        "email" => null,
+        "date_effet_start" => null,
+        "date_effet_end" => null,
+    ];
+
+    protected $rules = [
+        "filters.compagnie" => "nullable|string",
+        "filters.numero_adheration" => "nullable|string",
+        "filters.email" => "nullable|email",
+        "filters.date_effet_start" => "nullable|date",
+        "filters.date_effet_end" => "nullable|required_with:date_effet_start|date|gt:date_effet_start",
+    ];
 
     public function sortBy($column)
     {
@@ -35,18 +52,49 @@ class Show extends Component
             "orderDirection" => $this->sortDesc ? "desc" : "asc"
         ];
 
-        // if($this->query != '')
-        //     return InsuredsService::search($this->query, $options);
+        if ($this->query != '')
+            return FoldersService::simpleSearch($this->query, $options);
+
+        if ($this->filterQuery != '')
+            return FoldersService::search($this->filterQuery, $options);
 
         return FoldersService::getAll($options);
     }
 
     private function handleSortState($column)
     {
-        if($this->column == $column)
+        if ($this->column == $column)
             $this->sortDesc = !$this->sortDesc;
         else
             $this->sortDesc = true;
     }
 
+    public function applyFilter()
+    {
+        $this->validate();
+
+        $this->filters["date_effet"] = !isset($this->filters["date_effet_start"]) ? null : $this->filters["date_effet_start"] . ',' . $this->filters["date_effet_end"];
+        unset($this->filters["date_effet_start"], $this->filters["date_effet_end"]);
+
+        foreach ($this->filters as $filter => $value) {
+            if ($value == null) continue;
+            $this->filterQuery .= strtoupper($filter) . '::' . $value . ',';
+        }
+
+        $this->filterQuery = substr($this->filterQuery, 0, -1);
+    }
+
+    public function resetFilter()
+    {
+        $this->filters = [
+            "compagnie" => null,
+            "numero_adheration" => null,
+            "phone" => null,
+            "email" => null,
+            "date_effet_start" => null,
+            "date_effet_end" => null,
+        ];
+
+        $this->filterQuery = "";
+    }
 }

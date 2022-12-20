@@ -70,6 +70,18 @@ class FoldersService
         return true;
     }
 
+    public static function simpleSearch(string $query, array $options)
+    {
+        $folders = Folder::where('compagnie', 'LIKE', "%{$query}%") 
+        ->orWhere('cotisation_ht', 'LIKE', "%{$query}%") 
+        ->orWhere('cotisation_ttc', 'LIKE', "%{$query}%") 
+        ->orWhere('status', 'LIKE', "%{$query}%") 
+        ->orderBy($options["orderBy"], $options["orderDirection"])
+        ->paginate($options["limit"]);
+
+        return $folders;
+    }
+
     public static function search(string $query, array $options)
     {
         // $query = DATE_EFFET::date1,date2,COMPAGNIE::samsung,PHONE::34130320932,EMAIL::asdasd@test.com,NUMERO_ADHERATION::isjfdaisjd
@@ -91,7 +103,7 @@ class FoldersService
                     break;
 
                 case "PHONE":
-                    $folders = $folders->join('insureds', function ($join, $value) {
+                    $folders = $folders->join('insureds', function ($join) use($value){
                         $join->on('folders.id', '=', 'insureds.folder_id')
                              ->where('insureds.primary_phone', 'LIKE', "%$value%")
                              ->orWhere('insureds.secondary_phone', 'LIKE', "%$value%");
@@ -99,7 +111,7 @@ class FoldersService
                     break;
 
                 case "EMAIL":
-                    $folders = $folders->join('insureds', function ($join, $value) {
+                    $folders = $folders->join('insureds', function ($join) use($value){
                         $join->on('folders.id', '=', 'insureds.folder_id')
                              ->where('insureds.email', 'LIKE', "%$value%");
                     });
