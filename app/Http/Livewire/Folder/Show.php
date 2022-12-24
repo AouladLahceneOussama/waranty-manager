@@ -10,6 +10,8 @@ class Show extends Component
 {
     use WithPagination;
 
+    public $skeletonWidths = ["full", "1/2", "1/3", "1/4", "1/5", "2/3", "1/12", "2/12", "3/12", "4/12", "5/12", "6/12", "7/12", "8/12", "9/12", "10/12", "11/12"];
+    public $skeletonWidthsP = ["100", "25", "30", "50", "75", "80", "100", "45"];
     public $limit = 20;
     public $column = "created_at";
     public $sortDesc = true;
@@ -95,5 +97,10 @@ class Show extends Component
         ];
 
         $this->filterQuery = "";
+    }
+
+    public function delete($folder_id)
+    {
+        FoldersService::delete($folder_id);
     }
 }
