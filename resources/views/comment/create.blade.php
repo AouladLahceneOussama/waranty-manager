@@ -47,7 +47,7 @@
                 </button>
             </div>
             <div class="w-full">
-                <iframe x-ref="richTextArea" class="w-full h-48 bg-white overflow-y-auto"></iframe>
+                <iframe x-ref="richTextArea" class="w-full font-sans h-48 bg-white overflow-y-auto"></iframe>
             </div>
         </div>
 
@@ -68,7 +68,10 @@
                         <h1>Bonjour !</h1>
                         <p>Ajouter votre commentaire à propos de ce dossier.</p>
                     `;
-
+                    this.richTextArea.contentDocument.querySelector('head').innerHTML += `
+                        <style>
+                            body {font-family: Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";}
+                        </style>`;
                     this.richTextArea.contentDocument.designMode = "on";
                 },
 
