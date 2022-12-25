@@ -532,6 +532,8 @@
         </div>
 
         {{-- Documments --}}
+        <livewire:media.upload />
+        
         <div class="w-full p-4 mb-4 bg-teal-50 rounded">
             <div class="w-full">
                 <div class="flex justify-between items-center">
