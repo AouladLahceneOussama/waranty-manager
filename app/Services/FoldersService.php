@@ -22,7 +22,19 @@ class FoldersService
         $folder = Folder::find($folder_id);
         if (!$folder) return null;
 
-        return $folder;
+        $insureds = $folder->insureds;
+        $groupedInsureds= [];
+        foreach($insureds as $insured){
+            $groupedInsureds[$insured->type][] = $insured; 
+        }
+
+        return [
+            "folder" => $folder,
+            "insureds" => $groupedInsureds,
+            "medias" => $folder->medias,
+            "comments" => $folder->comments,
+            "appointements" => $folder->appointements,
+        ];
     }
 
     public static function create(array $data)
