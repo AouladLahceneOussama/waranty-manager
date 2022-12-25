@@ -133,38 +133,45 @@
                     @forelse($folders as $folder)
                     <tr class="border-b-2 border-gray-50 last:border-b-0">
                         <td class="w-10 p-2 text-center align-middle whitespace-nowrap">
-                            <span wire:loading.remove class="font-semibold leading-tight text-xs text-slate-700" >{{ $folder->id }}</span>
+                            <span wire:loading.remove class="font-semibold leading-tight text-xs text-slate-700">{{ $folder->id }}</span>
                             <span wire:loading class="w-10 animate-pulse bg-gray-400 h-3 rounded-full"></span>
                         </td>
                         <td class="p-2 pl-6 text-left align-middle whitespace-nowrap ">
                             <span wire:loading.remove class="font-semibold leading-tight text-xs text-slate-700">{{ $folder->compagnie }}</span>
-                            <span wire:loading style="width:{{ $skeletonWidthsP[rand(0, count($skeletonWidthsP)-1)] }}%" class=" animate-pulse bg-gray-400 h-3 rounded-full"></span>
+                            <span wire:loading class="w-{{ $skeletonWidths[rand(0, count($skeletonWidths)-1)] }} animate-pulse bg-gray-400 h-3 rounded-full"></span>
                         </td>
                         <td class="p-2 pl-6 leading-normal text-left align-middle text-size-sm whitespace-nowrap ">
                             <span wire:loading.remove class="font-semibold leading-tight text-xs text-slate-700">{{ $folder->souscripteur }}</span>
-                            <span wire:loading style="width:{{ $skeletonWidthsP[rand(0, count($skeletonWidthsP)-1)] }}%" class=" animate-pulse bg-gray-400 h-3 rounded-full"></span>
+                            <span wire:loading class="w-{{ $skeletonWidths[rand(0, count($skeletonWidths)-1)] }} animate-pulse bg-gray-400 h-3 rounded-full"></span>
                         </td>
                         <td class="p-2 align-middle whitespace-nowrap">
                             <span wire:loading.remove class="font-semibold leading-tight text-xs text-slate-700">{{ $folder->date_effet }}</span>
-                            <span wire:loading style="width:{{ $skeletonWidthsP[rand(0, count($skeletonWidthsP)-1)] }}%" class=" animate-pulse bg-gray-400 h-3 rounded-full"></span>
+                            <span wire:loading class="w-{{ $skeletonWidths[rand(0, count($skeletonWidths)-1)] }} animate-pulse bg-gray-400 h-3 rounded-full"></span>
                         </td>
                         <td class="p-2 text-left align-middle whitespace-nowrap ">
                             <p wire:loading.remove class="font-semibold leading-tight text-xs text-slate-700">{{ $folder->cotisation_ht }}<strong class="font-bold text-slate-900"> HT</strong></p>
                             <p wire:loading.remove class="font-semibold leading-tight text-xs text-slate-700">{{ $folder->cotisation_ttc }}<strong class="font-bold text-slate-900"> TTC</strong></p>
-                            <p wire:loading style="width:{{ $skeletonWidthsP[rand(0, count($skeletonWidthsP)-1)] }}%" class=" animate-pulse bg-gray-400 h-3 rounded-full"></p>
+                            <p wire:loading class="w-{{ $skeletonWidths[rand(0, count($skeletonWidths)-1)] }} animate-pulse bg-gray-400 h-3 rounded-full"></p>
                         </td>
                         <td class="p-2 text-center align-middle whitespace-nowrap">
                             <span wire:loading.remove class="font-semibold leading-tight text-xs text-slate-700">{{ $folder->user->name }}</span>
-                            <span wire:loading style="width:{{ $skeletonWidthsP[rand(0, count($skeletonWidthsP)-1)] }}%" class=" animate-pulse bg-gray-400 h-3 rounded-full"></span>
+                            <span wire:loading class="w-{{ $skeletonWidths[rand(0, count($skeletonWidths)-1)] }} animate-pulse bg-gray-400 h-3 rounded-full"></span>
                         </td>
                         <td class="p-2 text-center align-middle whitespace-nowrap">
                             <span wire:loading.remove class="font-semibold leading-tight text-xs text-slate-700">{{ $folder->created_at->diffForHumans() }}</span>
-                            <span wire:loading style="width:{{ $skeletonWidthsP[rand(0, count($skeletonWidthsP)-1)] }}%" class=" animate-pulse bg-gray-400 h-3 rounded-full"></span>
+                            <span wire:loading class="w-{{ $skeletonWidths[rand(0, count($skeletonWidths)-1)] }} animate-pulse bg-gray-400 h-3 rounded-full"></span>
                         </td>
                         <td class="p-2 text-center align-middle whitespace-nowrap">
-                            <i class="fa-solid fa-eye text-indigo-500 p-1 cursor-pointer text-xs"></i>
-                            <i class="fa-solid fa-pen text-green-500 p-1 cursor-pointer text-xs"></i>
-                            <i wire:click="delete({{ $folder->id }})" class="fa-solid fa-trash text-red-500 p-1 cursor-pointer text-xs"></i>
+                            <span wire:loading.remove>
+                                <i class="fa-solid fa-eye text-indigo-500 p-1 cursor-pointer text-xs"></i>
+                                <i class="fa-solid fa-pen text-green-500 p-1 cursor-pointer text-xs"></i>
+                                <i wire:click.prevent="delete({{ $folder->id }})" class="fa-solid fa-trash text-red-500 p-1 cursor-pointer text-xs"></i>
+                            </span>
+                            <span wire:loading>
+                                <i class="animate-pulse fa-solid fa-eye text-gray-400 p-1 cursor-pointer text-xs"></i>
+                                <i class="animate-pulse fa-solid fa-pen text-gray-400 p-1 cursor-pointer text-xs"></i>
+                                <i class="animate-pulse fa-solid fa-trash text-gray-400 p-1 cursor-pointer text-xs"></i>
+                            </span>
                         </td>
                     </tr>
                     @empty
