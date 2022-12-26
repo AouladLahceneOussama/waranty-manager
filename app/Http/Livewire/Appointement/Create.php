@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\Comment;
+namespace App\Http\Livewire\Appointement;
 
-use App\Services\CommentsService;
+use App\Services\AppointementsService;
 use Livewire\Component;
 
 class Create extends Component
@@ -10,17 +10,17 @@ class Create extends Component
     protected $listeners = ['folderCreated' => 'folderId'];
     protected $rules = [
         "folder_id" => "required|exists:folders,id",
-        "comment" => "required|string",
-        "status" => "required|string|in:URGENT,INFORMATIVE,EN_COURS"
+        "name" => "required|string",
+        "date" => "required|date_format:Y-m-d H:i:s"
     ];
 
-    public $comment;
-    public $status;
+    public $name;
+    public $date;
     public $folder_id;
 
     public function render()
     {
-        return view('comment.create');
+        return view('appointement.create');
     }
 
     public function folderId($folder_id)
@@ -31,10 +31,10 @@ class Create extends Component
     public function add()
     {
         $this->validate();
-
-        CommentsService::create([
-            "comment" => $this->comment,
-            "status" => $this->status
+        
+        AppointementsService::create([
+            "name" => $this->name,
+            "date" => $this->date,
         ], $this->folder_id);
     }
 }

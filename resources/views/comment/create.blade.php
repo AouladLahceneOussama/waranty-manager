@@ -50,6 +50,22 @@
                 <iframe x-ref="richTextArea" class="w-full font-sans h-48 bg-white overflow-y-auto"></iframe>
             </div>
         </div>
+        @error('comment')
+        <span class="text-red-500 text-xs italic">{{ $message }}</span>
+        @enderror
+        <div class="w-full my-2 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="status">
+                {{ __('Status') }}
+            </label>
+            <select wire:model="status" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Status" id="status">
+                <option value="IMPORTANT">Important</option>
+                <option value="EN_COURS">En cours</option>
+                <option value="INFORMATIVE">Informative</option>
+            </select>
+            @error('status')
+            <span class="text-red-500 text-xs italic">{{ $message }}</span>
+            @enderror
+        </div>
 
         <button type="button" @click="comment()" class="mt-2 px-4 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-700 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
             {{ __('Commenter') }}
@@ -64,10 +80,6 @@
                 init() {
                     let el = this.$refs.richTextArea
                     this.richTextArea = el;
-                    this.richTextArea.contentDocument.body.innerHTML += `
-                        <h1>Bonjour !</h1>
-                        <p>Ajouter votre commentaire à propos de ce dossier.</p>
-                    `;
                     this.richTextArea.contentDocument.querySelector('head').innerHTML += `
                         <style>
                             body {font-family: Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";}
@@ -81,7 +93,8 @@
 
                 comment() {
                     console.log(this.richTextArea.contentDocument.body.innerHTML)
-                    @this.set('comment', this.richTextArea.contentDocument.body.innerHTML);
+                    @this.comment = this.richTextArea.contentDocument.body.innerHTML;
+                    @this.add()
                 }
             }))
         })

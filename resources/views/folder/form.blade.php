@@ -175,9 +175,9 @@
                         {{ __('Civilité') }}
                     </label>
                     <select wire:model="insureds.primary.civilite" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Date de naissance" id="civilite">
-                        <Option>M.</Option>
-                        <Option>Mme</Option>
-                        <Option>Mlle</Option>
+                        <option value="M.">M.</option>
+                        <option value="Mme">Mme</option>
+                        <option value="Mlle">Mlle</option>
                     </select>
                     @error('civilite')
                     <span class="text-red-500 text-xs italic">{{ $message }}</span>
@@ -189,9 +189,9 @@
                         {{ __('Etat civil') }}
                     </label>
                     <select wire:model="insureds.primary.etat_civil" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Etat civil" id="etat_civil">
-                        <Option>célibataire</Option>
-                        <Option>marié(e)</Option>
-                        <Option>cohabitant(e)</Option>
+                        <option value="célibataire">célibataire</option>
+                        <option value="marié(e)">marié(e)</option>
+                        <option value="cohabitant(e)">cohabitant(e)</option>
                     </select>
                     @error('etat_civil')
                     <span class="text-red-500 text-xs italic">{{ $message }}</span>
@@ -328,9 +328,9 @@
                             {{ __('Civilité') }}
                         </label>
                         <select wire:model="insureds.secondary.civilite" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Date de naissance" id="civilite">
-                            <Option>M.</Option>
-                            <Option>Mme</Option>
-                            <Option>Mlle</Option>
+                            <option value="M.">M.</option>
+                            <option value="Mme">Mme</option>
+                            <option value="Mlle">Mlle</option>
                         </select>
                         @error('civilite')
                         <span class="text-red-500 text-xs italic">{{ $message }}</span>
@@ -415,9 +415,9 @@
                                 {{ __('Civilité') }}
                             </label>
                             <select wire:model="insureds.children.{{ $key }}.civilite" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Date de naissance" id="civilite_enf_{{ $key }}">
-                                <Option>M.</Option>
-                                <Option>Mme</Option>
-                                <Option>Mlle</Option>
+                                <option value="M.">M.</option>
+                                <option value="Mme">Mme</option>
+                                <option value="Mlle">Mlle</option>
                             </select>
                             @error('civilite_enf_{{ $key }}')
                             <span class="text-red-500 text-xs italic">{{ $message }}</span>
@@ -440,7 +440,7 @@
                 </div>
             </div>
             @endforeach
-            <button wire:click.prevent="addChild" class="mb-2 px-4 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-600 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
+            <button wire:click.prevent="save" class="mb-2 px-4 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-600 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
                 {{ __('Ajouter un enfant') }}
             </button>
         </div>
@@ -450,6 +450,9 @@
 
         {{-- Comments --}}
         <livewire:comment.create />
+
+        {{-- Appointements --}}
+        <livewire:appointement.create />
 
         <button wire:click.prevent="create" class="px-8 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-600 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
             {{ __('Enregistrer') }}
