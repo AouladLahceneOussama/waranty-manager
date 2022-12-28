@@ -17,55 +17,60 @@ class FormEdit extends Component
     public $activatedSection = [];
 
     // data  validation vars   
-    public FoldersService $folderService; 
-    public Folder $folder ;
+    public FoldersService $folderService;
+    public Folder $folder;
     public Insured $primary;
     public Insured $secondary;
-    public Insured $children;
-    public $insureds =["children" => ['','','']];
+    public Insured $chil;
+    public $insureds;
 
+    //ckeckbox And radio :model
     public $checked;
-    
+    public $prelevement;
 
 
 
-    public function addToActivatedSection($sectionName){
-        array_push( $this->activatedSection,$sectionName);
+
+    public function addToActivatedSection($sectionName)
+    {
+        array_push($this->activatedSection, $sectionName);
     }
-    
 
-    public function removeFromActivatedSection($sectionName){
+
+    public function removeFromActivatedSection($sectionName)
+    {
         if (($key = array_search($sectionName, $this->activatedSection)) !== false) {
             unset($this->activatedSection[$key]);
         }
     }
 
-   
-    
+
+
     protected $rules = [
         "folder.compagnie" => "required|string",
         "folder.souscripteur" => "required|string",
         "folder.cotisation_ht" => "required|string",
         "folder.cotisation_ttc" => "required|string",
         "folder.date_effet" => "required|date",
-        "folder.statut" => "required|string",
-        "insureds.*.nom" =>"required|string",
-        "insureds.*.nom_jeune_fille" =>"required|string",
-        "insureds.*.prenom" =>"required|string",
-        "insureds.*.date_naissance" =>"required|string",
-        "insureds.*.pays_naissance" =>"required|string",
-        "insureds.*.departement_naissance" =>"required|string",
-        "insureds.*.civilite" =>"required|string",
-        "insureds.*.etat_civil" =>"required|string",
-        "insureds.*.code_securite_social" =>"required|string",
-        "insureds.*.primary_phone" =>"required|string",
-        "insureds.*.secondary_phone" =>"required|string",
-        "insureds.*.email" =>"required|string",
-        "insureds.*.iban" =>"required|string",
-        "insureds.*.jours_prelevement" =>"required|string",
-      
+        "folder.status" => "",
+        "*.nom" => "required|string",
+        "*.nom_jeune_fille" => "required|string",
+        "*.prenom" => "required|string",
+        "*.date_naissance" => "required|string",
+        "*.pays_naissance" => "required|string",
+        "*.departement_naissance" => "required|string",
+        "*.civilite" => "required|string",
+        "*.etat_civil" => "required|string",
+        "*.code_securite_social" => "required|string",
+        "*.primary_phone" => "required|string",
+        "*.secondary_phone" => "required|string",
+        "*.email" => "required|string",
+        "*.iban" => "required|string",
+        "*.jours_prelevement" => "required|string",
+
     ];
 
+    public $childTotal;
     public function addChild()
     {
         $this->insureds['children'][] = [
@@ -75,44 +80,117 @@ class FormEdit extends Component
             "civilite" => "",
             "code_securite_social" => "",
         ];
+
+        
+        $this->addToActivatedSection('editChild'.$this->childTotal);
+        $this->childTotal++;
     }
     public function removeChild($key)
     {
         unset($this->insureds['children'][$key]);
         $this->insureds['children'] = array_values($this->insureds['children']);
+        $this->childTotal--;
     }
 
 
-    public function create(){
+    public function create()
+    {
         //$this->validate();
         dd($this->insureds);
     }
 
-    public function cancel(){
-        $this->removeFromActivatedSection('editGeneralInfo');
-        $this->folder->setRawAttributes($this->folder->getOriginal());
-        $this->checked=$this->folder->status;
+    public function save($sectionName)
+    {
+        $key = '';
+        if(strpos($sectionName, "editChild") !==false){
+             $key=str_replace('editChild', '', $sectionName);
+             $this->child= FoldersService::get($this->folderId)["insureds"]["children"][$key];
+        }
+        $this->removeFromActivatedSection($sectionName);
 
+        switch ($sectionName) {
+            case 'editGeneralInfo':
+                $this->folder->status =  $this->checked;
+                FoldersService::edit($this->folder->getAttributes(), $this->folder->id);
+
+                break;
+
+            case 'editPrimaryAsured':
+                $this->insureds["primary"][0] = $this->primary->getOriginal();
+                $this->prelevement = $this->primary->jour_prelevement;
+                break;
+
+            case 'editSecondaryAsured':
+                $this->insureds["secondary"][0] = $this->secondary->getOriginal();
+                break;
+            case 'editChild'.$key:
+                $this->insureds["children"][$key] = $this->child->getOriginal();
+                break;
+            default:
+                # code...
+                break;
+        }
+    }
+
+
+    public function cancel($sectionName)
+    {
+        $key = '';
+        if(strpos($sectionName, "editChild") !==false){
+             $key=str_replace('editChild', '', $sectionName);
+             $this->child= FoldersService::get($this->folderId)["insureds"]["children"][$key];
+        }
+        $this->removeFromActivatedSection($sectionName);
+
+        switch ($sectionName) {
+            case 'editGeneralInfo':
+                $this->folder->setRawAttributes($this->folder->getOriginal());
+                $this->checked = $this->folder->status;
+                break;
+
+            case 'editPrimaryAsured':
+                $this->insureds["primary"][0] = $this->primary->getOriginal();
+                $this->prelevement = $this->primary->jour_prelevement;
+                break;
+
+            case 'editSecondaryAsured':
+                $this->insureds["secondary"][0] = $this->secondary->getOriginal();
+                break;
+            case 'editChild'.$key:
+                $this->insureds["children"][$key] = $this->child->getOriginal();
+                break;
+            default:
+                # code...
+                break;
+        }
     }
 
     public function mount()
     {
-       
-        
-        $this->folder = new Folder();
-        $this->insured = new Insured();
-        $this->enfant = new Insured();
 
-       // dd(FoldersService::get($this->folderId));
+ 
+        // $this->folder = new Folder();
+        // $this->insured = new Insured();
+        // $this->enfant = new Insured();
+
+        //Folder Data
         $this->folder = FoldersService::get($this->folderId)["folder"];
-       $this->checked=$this->folder->status;
+        $this->checked = $this->folder->status == 'INCOMPLET' ? '' : 'COMPLET';
 
-        $this->editGeneralInfo=false;
+        //Insureds Data
+        $this->insureds = FoldersService::get($this->folderId)["insureds"];
+        $this->primary = $this->insureds["primary"][0]??  new Insured();
+        // dd($this->insureds);
+        $this->secondary = $this->insureds["secondary"][0]?? new Insured();
+
+        $this->prelevement = $this->primary->jour_prelevement;
+        if(isset($this->insureds['children']))
+        $this->childTotal = count($this->insureds['children']) ?? 0;
     }
 
     public function render()
     {
-       
+
         return view('folder.form-edit');
     }
 }

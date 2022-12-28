@@ -63,7 +63,7 @@ class FoldersService
         $folder->date_effet = $data["date_effet"];
         $folder->souscripteur = $data["souscripteur"];
         $folder->comment = $data["comment"] ?? null;
-        $folder->status = $data["status"] ?? "INCOMPLET";
+        $folder->status = $data["status"] == "" ? "INCOMPLET" : "COMPLET";
         $folder->save();
 
         return $folder;
