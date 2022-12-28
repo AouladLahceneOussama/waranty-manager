@@ -103,8 +103,9 @@ class FormEdit extends Component
         $this->insured = new Insured();
         $this->enfant = new Insured();
 
-        $this->folder = FoldersService::get($this->folderId);
-        $this->checked=$this->folder->status;
+       // dd(FoldersService::get($this->folderId));
+        $this->folder = FoldersService::get($this->folderId)["folder"];
+       $this->checked=$this->folder->status;
 
         $this->editGeneralInfo=false;
     }

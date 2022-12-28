@@ -10,7 +10,7 @@
             <button class="mb-4 px-6 py-3 font-bold text-center text-white uppercase border-0 rounded-md cursor-pointer text-xs shadow-md bg-teal-600 hover:bg-teal-700 duration-300 ease-in-out ">
                 <a class="w-full h-full" href="{{ route('folder.create') }}">{{ __('Nouveau Dossier') }}</a>
             </button>
-            @livewire('folder.show')
+            <livewire:folder.show />
         </div>
     </div>
 </x-app-layout>

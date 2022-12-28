@@ -16,7 +16,7 @@ class InsuredFactory extends Factory
      */
     public function definition()
     {
-        $type = $this->faker->randomElement(['primary', 'secondary']);
+        $type = $this->faker->randomElement(['primary', 'secondary', 'children']);
         if ($type == 'primary') {
             return [
                 "folder_id" => rand(1, 20),
@@ -37,7 +37,9 @@ class InsuredFactory extends Factory
                 "jour_prelevement" => $this->faker->randomElement([5, 10, 15]),
                 "type" => "primary"
             ];
-        } else {
+        } 
+
+        if ($type == 'secondary') {
             return [
                 "folder_id" => rand(1, 20),
                 "nom" => $this->faker->name(),
@@ -47,6 +49,19 @@ class InsuredFactory extends Factory
                 "etat_civil" => $this->faker->text(10),
                 "code_securite_social" => $this->faker->numberBetween(1000, 6000),
                 "type" => "secondary"
+            ];
+        }
+
+        if ($type == 'children') {
+            return [
+                "folder_id" => rand(1, 20),
+                "nom" => $this->faker->name(),
+                "prenom" => $this->faker->lastName(),
+                "date_naissance" => $this->faker->date(),
+                "civilite" => $this->faker->text(20),
+                "etat_civil" => $this->faker->text(10),
+                "code_securite_social" => $this->faker->numberBetween(1000, 6000),
+                "type" => "children"
             ];
         }
     }

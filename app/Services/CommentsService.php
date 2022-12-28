@@ -19,6 +19,7 @@ class CommentsService {
         $comment->user_id = Auth::id();
         $comment->folder_id = $folder_id;
         $comment->message = $data["message"];
+        $comment->status = $data["status"];
         $comment->save();
 
         return $comment;

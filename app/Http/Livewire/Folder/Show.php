@@ -10,6 +10,7 @@ class Show extends Component
 {
     use WithPagination;
 
+    public $skeletonWidths = ["full", "1/2", "1/3", "1/4", "1/5", "2/3", "2/12", "3/12", "4/12", "5/12", "6/12", "7/12", "8/12", "9/12", "10/12", "11/12"];
     public $limit = 20;
     public $column = "created_at";
     public $sortDesc = true;
@@ -29,7 +30,7 @@ class Show extends Component
         "filters.numero_adheration" => "nullable|string",
         "filters.email" => "nullable|email",
         "filters.date_effet_start" => "nullable|date",
-        "filters.date_effet_end" => "nullable|required_with:date_effet_start|date|gt:date_effet_start",
+        "filters.date_effet_end" => "nullable|required_with:date_effet_start|date|after_or_equal:date_effet_start",
     ];
 
     public function sortBy($column)
@@ -72,13 +73,12 @@ class Show extends Component
     public function applyFilter()
     {
         $this->validate();
-
+        $this->filterQuery = "";
         $this->filters["date_effet"] = !isset($this->filters["date_effet_start"]) ? null : $this->filters["date_effet_start"] . ',' . $this->filters["date_effet_end"];
-        unset($this->filters["date_effet_start"], $this->filters["date_effet_end"]);
 
         foreach ($this->filters as $filter => $value) {
             if ($value == null) continue;
-            $this->filterQuery .= strtoupper($filter) . '::' . $value . ',';
+            $this->filterQuery .= strtoupper($filter) . '::' . urlencode($value) . ',';
         }
 
         $this->filterQuery = substr($this->filterQuery, 0, -1);
@@ -96,5 +96,10 @@ class Show extends Component
         ];
 
         $this->filterQuery = "";
+    }
+
+    public function delete($folder_id)
+    {
+        FoldersService::delete($folder_id);
     }
 }
