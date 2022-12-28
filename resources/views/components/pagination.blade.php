@@ -36,7 +36,7 @@
 
                     <!--  Show active page two pages before and after it.  -->
                     @if ($page == $paginator->currentPage())
-                        <span class="mx-1 w-9 h-9 text-sm leading-9 bg-indigo-500 text-white font-bold text-center rounded-full">{{ $page }}</span>
+                        <span class="mx-1 w-9 h-9 text-sm leading-9 bg-teal-600 text-white font-bold text-center rounded-full">{{ $page }}</span>
                     @elseif ($page === $paginator->currentPage() + 1 || $page === $paginator->currentPage() + 2 || $page === $paginator->currentPage() - 1 || $page === $paginator->currentPage() - 2)
                         <a class="mx-1 w-9 h-9 text-sm leading-8 border-2 border-gray-300 text-slate-400 font-bold text-center hover:text-slate-800 hover:border-slate-800 rounded-full cursor-pointer transition duration-300 ease-in-out" wire:click="gotoPage({{$page}})">{{ $page }}</a>
                     @endif

@@ -61,11 +61,11 @@
                     </div>
                 </div>
                 <div class="w-full px-0 sm:px-3 py-2 sm:py-0 flex justify-center items-strech sm:w-1/4 space-x-2">
-                    <button type="button" wire:click="applyFilter" class="w-1/2 py-2 rounded-md bg-indigo-400 text-center text-xs font-semibold text-white outline-none hover:shadow-form">
+                    <button type="button" wire:click="applyFilter" class="w-1/2 py-2 rounded-md bg-teal-600  hover:bg-teal-700 text-center text-xs font-semibold text-white outline-none hover:shadow-form">
                         Appliquer
                     </button>
-                    <button type="button" wire:click="resetFilter" class="w-1/2 py-2 rounded-md bg-gray-400 text-center text-xs font-semibold text-white outline-none hover:shadow-form">
-                        Renitializer
+                    <button type="button" wire:click="resetFilter" class="w-1/2 py-2 rounded-md bg-gray-400 hover:bg-gray-500 text-center text-xs font-semibold text-white outline-none hover:shadow-form">
+                        Réinitialiser
                     </button>
                 </div>
             </div>
@@ -81,7 +81,7 @@
 
                 <x-slot name="multiSearch">
                     <input wire:model="query" type="text" placeholder="Search by email, name, phone, role, stat" class="w-full rounded-l-lg p-0 px-2 py-1 border-gray-300 text-sm">
-                    <button class="w-12 bg-indigo-400 rounded-r-lg text-white cursor-pointer"><i class="fa-brands fa-searchengin"></i></button>
+                    <button class="w-12 bg-teal-600  rounded-r-lg text-white"><i class="fa-brands fa-searchengin"></i></button>
                 </x-slot>
 
                 <x-slot name="recordSize">

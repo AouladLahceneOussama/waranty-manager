@@ -24,4 +24,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])
     // Folders routes
     Route::get('/folders', fn () => view('folder.index'))->name('folder.index');
     Route::get('/folders/create', fn () => view('folder.create'))->name('folder.create');
+    Route::get('/folders/edit/{id}', fn ($folderId) => view('folder.edit',['folderId'=>$folderId]));
+    // Route::get('/folders/', function($id) {  
+    //     return  view('folder.edit',["id"=>$id]);
+    //  });
+   
 });
