@@ -146,17 +146,17 @@
                             @include('components.sort-icons', ['name' => 'cotisation_ht'])
                         </th>
                         <th wire:click="sortBy('user_id')"
-                            class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 hover:opacity-100 cursor-pointer transition ease-in-out duration-300">
+                            class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 hover:opacity-100 cursor-pointer transition ease-in-out duration-300">
                             Ajoute par
                             @include('components.sort-icons', ['name' => 'user_id'])
                         </th>
                         <th wire:click="sortBy('created_at')"
-                            class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 hover:opacity-100 cursor-pointer transition ease-in-out duration-300">
+                            class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 hover:opacity-100 cursor-pointer transition ease-in-out duration-300">
                             Ajoute le
                             @include('components.sort-icons', ['name' => 'created_at'])
                         </th>
                         <th
-                            class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                            class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                             Actions
                         </th>
                     </tr>
@@ -199,19 +199,19 @@
                                     class="w-{{ $skeletonWidths[rand(0, count($skeletonWidths) - 1)] }} animate-pulse bg-gray-400 h-3 rounded-full">
                                 </p>
                             </td>
-                            <td class="p-2 text-center align-middle whitespace-nowrap">
+                            <td class="p-2 pl-6 text-left align-middle whitespace-nowrap">
                                 <span wire:loading.remove
                                     class="font-semibold leading-tight text-xs text-slate-700">{{ $folder->user->name }}</span>
                                 <span wire:loading
                                     class="w-{{ $skeletonWidths[rand(0, count($skeletonWidths) - 1)] }} animate-pulse bg-gray-400 h-3 rounded-full"></span>
                             </td>
-                            <td class="p-2 text-center align-middle whitespace-nowrap">
+                            <td class="p-2 pl-6 text-left align-middle whitespace-nowrap">
                                 <span wire:loading.remove
                                     class="font-semibold leading-tight text-xs text-slate-700">{{ $folder->created_at->diffForHumans() }}</span>
                                 <span wire:loading
                                     class="w-{{ $skeletonWidths[rand(0, count($skeletonWidths) - 1)] }} animate-pulse bg-gray-400 h-3 rounded-full"></span>
                             </td>
-                            <td class="p-2 text-center align-middle whitespace-nowrap">
+                            <td class="p-2 pl-6 text-left align-middle whitespace-nowrap">
                                 <span wire:loading.remove>
                                     <a href="/folders/edit/{{ $folder->id }}"><i
                                             class="fa-solid fa-pen text-teal-600 p-1 cursor-pointer text-xs"></i>
@@ -219,8 +219,6 @@
                                         class="fa-solid fa-trash text-red-500 p-1 cursor-pointer text-xs"></i>
                                 </span>
                                 <span wire:loading>
-                                    <i
-                                        class="animate-pulse fa-solid fa-eye text-gray-400 p-1 cursor-pointer text-xs"></i>
                                     <i
                                         class="animate-pulse fa-solid fa-pen text-gray-400 p-1 cursor-pointer text-xs"></i>
                                     <i
@@ -230,7 +228,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="text-center py-6">
+                            <td colspan="8" class="text-left py-6">
                                 <span class="text-gray-400">Il y a pas des dossiers pour le moment, commencez par la
                                     creation d'un nouveua dossier.</span>
                             </td>
