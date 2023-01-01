@@ -4,6 +4,9 @@ namespace App\Http\Livewire\Folder;
 
 use App\Models\Folder;
 use App\Models\Insured;
+use App\Services\FoldersService;
+use App\Services\InsuredsService;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -26,7 +29,8 @@ class Form extends Component
         "folder.cotisation_ht" => "required|string",
         "folder.cotisation_ttc" => "required|string",
         "folder.date_effet" => "required|date",
-        "folder.statut" => "required|string",
+        "folder.numero_adheration" => "required|string",
+        "folder.status" => "required|string",
         "insureds.*.nom" => "required|string",
         "insureds.*.nom_jeune_fille" => "required|string",
         "insureds.*.prenom" => "required|string",
@@ -53,7 +57,7 @@ class Form extends Component
             "code_securite_social" => "",
         ];
     }
-    
+
     public function removeChild($key)
     {
         unset($this->insureds['children'][$key]);
@@ -63,7 +67,9 @@ class Form extends Component
     public function create()
     {
         //$this->validate();
-        dd($this->insureds);
+        $this->folder->user_id = Auth::id();
+        $this->folder->save();
+        InsuredsService::create($this->insureds, $this->folder->id);
     }
 
     public function mount()
