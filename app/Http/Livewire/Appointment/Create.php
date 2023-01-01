@@ -12,7 +12,7 @@ class Create extends Component
         // "folderId" => "required|exists:folders,id",
         "name" => "required|string",
         // "date" => "required|date_format:Y-m-d\TH:i"
-        "date" => "required"
+        "date" => "required|after_or_equal:now"
     ];
 
     public $name;
@@ -35,6 +35,8 @@ class Create extends Component
             "date" => $this->date,
         ], $this->folderId);
 
+        $this->name = "";
+        $this->date = "";
         $this->emit('AppointementAdded');
     }
 

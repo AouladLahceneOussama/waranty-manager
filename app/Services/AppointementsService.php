@@ -11,7 +11,7 @@ class AppointementsService {
     public static function get(int $folder_id)
     {
         $folder = Folder::find($folder_id);
-        return $folder->appointements()->whereDate('date', '>', Carbon::now())->orderBy('date', 'asc')->get();
+        return $folder->appointements()->where('date', '>', Carbon::now('Africa/Casablanca'))->orderBy('date', 'asc')->get();
     }
     
     public static function getAppointment($appointment_id)

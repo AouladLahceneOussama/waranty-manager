@@ -15,7 +15,7 @@
             <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="date">
                 {{ __('date') }}
             </label>
-            <input wire:model="date" type="datetime-local" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Prénom de l'assuré" id="prenom" />
+            <input wire:model="date" type="datetime-local" min="{{date('Y-m-d\TH:i')}}" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Prénom de l'assuré" id="prenom" />
             @error('date')
             <span class="text-red-500 text-xs italic">{{ $message }}</span>
             @enderror
