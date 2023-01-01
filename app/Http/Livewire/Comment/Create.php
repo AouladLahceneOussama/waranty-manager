@@ -2,30 +2,28 @@
 
 namespace App\Http\Livewire\Comment;
 
+use App\Models\Comment;
 use App\Services\CommentsService;
 use Livewire\Component;
 
 class Create extends Component
 {
-    protected $listeners = ['folderCreated' => 'folderId'];
+    protected $listeners = ['startCommentEditing'];
     protected $rules = [
-        "folder_id" => "required|exists:folders,id",
+        // "folder_id" => "required|exists:folders,id",
         "comment" => "required|string",
-        "status" => "required|string|in:URGENT,INFORMATIVE,EN_COURS"
+        "status" => "required|string|in:URGENT,INFORMATIVE,EN_COURS,COMPLET"
     ];
 
+    public $comment_id;
     public $comment;
     public $status;
-    public $folder_id;
+    public $folderId;
+    public $updating = false;
 
     public function render()
     {
         return view('comment.create');
-    }
-
-    public function folderId($folder_id)
-    {
-        $this->folder_id = $folder_id;
     }
 
     public function add()
@@ -35,6 +33,40 @@ class Create extends Component
         CommentsService::create([
             "comment" => $this->comment,
             "status" => $this->status
-        ], $this->folder_id);
+        ], $this->folderId);
+
+        $this->emit('CommentAdded');
+    }
+
+    public function startCommentEditing($comment)
+    {
+        $this->comment_id = $comment['id'];
+        $this->comment = $comment['comment'];
+        $this->status = $comment['status'];
+        $this->updating = true;
+    }
+
+    public function edit()
+    {
+        $this->validate();
+
+        CommentsService::edit([
+            "folder_id" => $this->folderId,
+            "comment" => $this->comment,
+            "status" => $this->status,
+        ], $this->comment_id);
+
+        $this->updating = false;
+        $this->comment = "";
+        $this->status = "";
+
+        $this->emit('CommentAdded');
+    }
+
+    public function cancelEdit()
+    {
+        $this->name = "";
+        $this->date = "";
+        $this->updating = false;
     }
 }

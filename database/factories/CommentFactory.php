@@ -20,7 +20,7 @@ class CommentFactory extends Factory
             'user_id' => rand(1,2),
             'folder_id' => rand(1, 20),
             'comment' => $this->faker->text(100),
-            'status' => $this->faker->randomElement(['DONE', 'IMPORTANT', 'PENDING']),
+            'status' => $this->faker->randomElement(['COMPLET', 'URGENT', 'EN_COURS', 'INFORMATIVE']),
         ];
     }
 }

@@ -8,30 +8,39 @@ use Carbon\Carbon;
 
 class AppointementsService {
 
-    public static function get(Folder $folder)
+    public static function get(int $folder_id)
     {
-        return $folder->appointements();
+        $folder = Folder::find($folder_id);
+        return $folder->appointements()->whereDate('date', '>', Carbon::now())->orderBy('date', 'asc')->get();
     }
     
+    public static function getAppointment($appointment_id)
+    {
+        $appointment = Appointement::find($appointment_id);
+        return $appointment;
+    }
+
     public static function create(array $data, int $folder_id)
     {
         $appointment = new Appointement();
         $appointment->folder_id = $folder_id;
         $appointment->name = $data["name"];
-        $appointment->date = $data["date"];
+        $appointment->date = Carbon::createFromFormat('Y-m-d\TH:i', $data["date"]);
         $appointment->save();
-
+        
         return $appointment;
     }
 
     public static function edit(array $data, int $appointment_id)
     {
-        $appointment = Folder::find($appointment_id);
+        $appointment = Appointement::find($appointment_id);
         if(!$appointment) return false;
+
+        // dd(date('Y-m-d\TH:i', strtotime($data['date'])));
 
         $appointment->folder_id = $data["folder_id"];
         $appointment->name = $data["name"];
-        $appointment->date = $data["date"];
+        $appointment->date = date('Y-m-d\TH:i', strtotime($data['date']));
         $appointment->save();
 
         return $appointment;
@@ -39,7 +48,7 @@ class AppointementsService {
 
     public static function delete(int $appointment_id)
     {
-        $appointment = Folder::find($appointment_id);
+        $appointment = Appointement::find($appointment_id);
         if(!$appointment) return false;
         
         $appointment->delete();

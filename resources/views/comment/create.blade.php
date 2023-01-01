@@ -1,11 +1,4 @@
-<div class="w-full p-5 bg-teal-50">
-    <div class="w-full">
-        <div class="flex justify-between items-center">
-            <span class="text-teal-600 text-xl ">{{ __('Commentaires') }}</span>
-        </div>
-        <div class="bg-gray-300 my-2 w-full h-px"></div>
-    </div>
-
+<div class="w-full px-4 bg-teal-50">
     <div class="w-full mx-auto rounded-xl py-5 text-black" x-data="app">
         <div class="border border-gray-300 overflow-hidden rounded-md">
             <div class="w-full flex justify-center items-center border-b border-gray-300 text-xl text-gray-600">
@@ -47,7 +40,7 @@
                 </button>
             </div>
             <div class="w-full">
-                <iframe x-ref="richTextArea" class="w-full font-sans h-48 bg-white overflow-y-auto"></iframe>
+                <iframe x-ref="richTextArea" class="w-full font-sans h-32 bg-white overflow-y-auto" id='richComment'></iframe>
             </div>
         </div>
         @error('comment')
@@ -58,8 +51,9 @@
                 {{ __('Status') }}
             </label>
             <select wire:model="status" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Status" id="status">
-                <option value="IMPORTANT">Important</option>
+                <option value="URGENT">Urgent</option>
                 <option value="EN_COURS">En cours</option>
+                <option value="COMPLET">Complet</option>
                 <option value="INFORMATIVE">Informative</option>
             </select>
             @error('status')
@@ -67,12 +61,24 @@
             @enderror
         </div>
 
-        <button type="button" @click="comment()" class="mt-2 px-4 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-700 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
+        @if(!$updating)
+        <button type="button" @click="addComment()" class="mt-2 px-4 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-700 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
             {{ __('Commenter') }}
         </button>
+        @else
+        <div class="flex justify-center items-center mt-2">
+            <button type="button" @click="editComment()" class="w-full md:w-1/2 px-4 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase hover:bg-teal-700 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
+                {{ __('Modifier rendez-vous') }}
+            </button>
+            <button type="button" wire:click.prevent="cancelEdit" class="w-full md:w-1/2 px-4 py-2 bg-red-600 border rounded-md font-semibold text-xs text-white uppercase hover:bg-red-700 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
+                {{ __('Annuler') }}
+            </button>
+        </div>
+        @endif
+
     </div>
 
-    <script>
+    <script type="text/javascript">
         document.addEventListener('alpine:init', () => {
             Alpine.data('app', () => ({
                 richTextArea: false,
@@ -91,12 +97,24 @@
                     this.richTextArea.contentDocument.execCommand(cmd, !1, param || null)
                 },
 
-                comment() {
-                    console.log(this.richTextArea.contentDocument.body.innerHTML)
+                addComment() {
                     @this.comment = this.richTextArea.contentDocument.body.innerHTML;
                     @this.add()
+                    this.richTextArea.contentDocument.body.innerHTML = "";
+                },
+
+                editComment() {
+                    @this.comment = this.richTextArea.contentDocument.body.innerHTML;
+                    @this.edit()
+                    this.richTextArea.contentDocument.body.innerHTML = "";
                 }
             }))
         })
+
+        window.onload = function() {
+            Livewire.on('startCommentEditing', (comment) => {
+                document.querySelector("#richComment").contentDocument.body.innerHTML = comment.comment
+            })
+        }
     </script>
 </div>

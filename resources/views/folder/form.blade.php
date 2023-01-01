@@ -448,12 +448,6 @@
         {{-- Documments --}}
         <livewire:media.upload />
 
-        {{-- Comments --}}
-        <livewire:comment.create />
-
-        {{-- Appointements --}}
-        <livewire:appointement.create />
-
         <button wire:click.prevent="create" class="px-8 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-600 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
             {{ __('Enregistrer') }}
         </button>
