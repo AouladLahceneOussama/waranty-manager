@@ -89,7 +89,6 @@ class FormEdit extends Component
         $this->childTotal--;
     }
 
-
     public function edit()
     {
         //$this->validate();

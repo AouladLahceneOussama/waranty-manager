@@ -137,41 +137,14 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="w-full  md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="status">
-                        {{ __('Status') }}
-                    </label>
-                    <div class="flex  items-center">
-                        <label class="inline-flex relative items-center cursor-pointer">
-                            <input  wire:model="checked" type="checkbox" value="COMPLET" class="sr-only peer"
-                                {{ !in_array('editGeneralInfo', $activatedSection) ? 'disabled' : '' }}
-                                >
-                            <div
-                                class="w-11 h-6 bg-gray-200 rounded-full peer  peer-checked:after:translate-x-full 
-                                peer-checked:after:border-white  after:absolute after:top-0.5 after:left-[2px] 
-                                after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  
-                                peer-checked:bg-teal-600">
-                            </div>
-                            <span class="ml-3 text-sm font-medium text-gray-700 ">Dossier
-                                Complet</span>
-
-                        </label>
-
-
-                        @error('folder.status')
-                            <span class="text-red-500 text-xs italic">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
             </div>
 
             @if (in_array('editGeneralInfo', $activatedSection))
-                <button wire:click.prevent="save('editGeneralInfo')"
+                <button type="button" wire:click.prevent="save('editGeneralInfo')"
                     class="mb-2 px-8 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-700 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
                     {{ __('Enregistrer') }}
                 </button>
-                <button wire:click.prevent="cancel('editGeneralInfo')"
+                <button type="button" wire:click.prevent="cancel('editGeneralInfo')"
                     class="mb-2 px-8 py-2 bg-red-500 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-600 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
                     {{ __('Annuler') }}
                 </button>
@@ -432,7 +405,7 @@
                     class="mb-2 px-8 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-700 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
                     {{ __('Enregistrer') }}
                 </button>
-                <button wire:click.prevent="cancel('editPrimaryAsured')"
+                <button type="button" wire:click.prevent="cancel('editPrimaryAsured')"
                     class="mb-2 px-8 py-2 bg-red-500 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-600 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
                     {{ __('Annuler') }}
                 </button>
@@ -543,7 +516,7 @@
                     class="mb-2 px-8 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-700 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
                     {{ __('Enregistrer') }}
                 </button>
-                <button wire:click.prevent="cancel('editSecondaryAsured')"
+                <button type="button" wire:click.prevent="cancel('editSecondaryAsured')"
                     class="mb-2 px-8 py-2 bg-red-500 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-600 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
                     {{ __('Annuler') }}
                 </button>
@@ -573,7 +546,7 @@
                                             class="fa-solid fa-pen hover:text-teal-700 p-1 cursor-pointer text-xs"></i>
                                     @endif
                                 </span>
-                                <button wire:click.prevent="removeChild({{ $key }})"
+                                <button type="button" wire:click.prevent="removeChild({{ $key }})"
                                     class="mb-2 px-8 py-2 bg-red-500 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-600 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
                                     {{ __('Supprimer l\'enfant') }}
                                 </button>
@@ -673,7 +646,7 @@
                                 class="mb-2 px-8 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-700 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
                                 {{ __('Enregistrer') }}
                             </button>
-                            <button wire:click.prevent="cancel('editChild{{ $key }}')"
+                            <button type="button" wire:click.prevent="cancel('editChild{{ $key }}')"
                                 class="mb-2 px-8 py-2 bg-red-500 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-600 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
                                 {{ __('Annuler') }}
                             </button>
@@ -682,7 +655,7 @@
                     </div>
                 @endforeach
             @endif
-            <button wire:click.prevent="addChild"
+            <button type="button" wire:click.prevent="addChild"
                 class="mb-2 px-4 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-600 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
                 {{ __('Ajouter un enfant') }}
             </button>
@@ -692,7 +665,7 @@
         <livewire:media.upload />
         <livewire:media.show :folderId="$folderId" />
 
-        <button wire:click.prevent="edit"
+        <button type="button" wire:click.prevent="edit"
             class="px-8 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-600 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
             {{ __('Enregistrer') }}
         </button>
