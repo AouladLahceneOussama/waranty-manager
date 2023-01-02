@@ -27,24 +27,7 @@ class FormEdit extends Component
     //ckeckbox And radio :model
     public $checked;
     public $prelevement;
-
-
-
-
-    public function addToActivatedSection($sectionName)
-    {
-        array_push($this->activatedSection, $sectionName);
-    }
-
-
-    public function removeFromActivatedSection($sectionName)
-    {
-        if (($key = array_search($sectionName, $this->activatedSection)) !== false) {
-            unset($this->activatedSection[$key]);
-        }
-    }
-
-
+    public $childTotal;
 
     protected $rules = [
         "folder.compagnie" => "required|string",
@@ -52,7 +35,8 @@ class FormEdit extends Component
         "folder.cotisation_ht" => "required|string",
         "folder.cotisation_ttc" => "required|string",
         "folder.date_effet" => "required|date",
-        "folder.status" => "",
+        "folder.numero_adheration" => "required|string",
+        "folder.status" => "required|string",
         "*.nom" => "required|string",
         "*.nom_jeune_fille" => "required|string",
         "*.prenom" => "required|string",
@@ -70,7 +54,19 @@ class FormEdit extends Component
 
     ];
 
-    public $childTotal;
+    public function addToActivatedSection($sectionName)
+    {
+        array_push($this->activatedSection, $sectionName);
+    }
+
+
+    public function removeFromActivatedSection($sectionName)
+    {
+        if (($key = array_search($sectionName, $this->activatedSection)) !== false) {
+            unset($this->activatedSection[$key]);
+        }
+    }
+
     public function addChild()
     {
         $this->insureds['children'][] = [
@@ -81,10 +77,11 @@ class FormEdit extends Component
             "code_securite_social" => "",
         ];
 
-        
-        $this->addToActivatedSection('editChild'.$this->childTotal);
+
+        $this->addToActivatedSection('editChild' . $this->childTotal);
         $this->childTotal++;
     }
+
     public function removeChild($key)
     {
         unset($this->insureds['children'][$key]);
@@ -93,26 +90,29 @@ class FormEdit extends Component
     }
 
 
-    public function create()
+    public function edit()
     {
         //$this->validate();
         dd($this->insureds);
+
+        // send event to upload new files
+        $this->emit("createMediaFolder", $this->folderId);
     }
 
     public function save($sectionName)
     {
         $key = '';
-        if(strpos($sectionName, "editChild") !==false){
-             $key=str_replace('editChild', '', $sectionName);
-             $this->child= FoldersService::get($this->folderId)["insureds"]["children"][$key];
+        if (strpos($sectionName, "editChild") !== false) {
+            $key = str_replace('editChild', '', $sectionName);
+            $this->child = FoldersService::get($this->folderId)["insureds"]["children"][$key];
         }
+
         $this->removeFromActivatedSection($sectionName);
 
         switch ($sectionName) {
             case 'editGeneralInfo':
                 $this->folder->status =  $this->checked;
                 FoldersService::edit($this->folder->getAttributes(), $this->folder->id);
-
                 break;
 
             case 'editPrimaryAsured':
@@ -123,22 +123,23 @@ class FormEdit extends Component
             case 'editSecondaryAsured':
                 $this->insureds["secondary"][0] = $this->secondary->getOriginal();
                 break;
-            case 'editChild'.$key:
+
+            case 'editChild' . $key:
                 $this->insureds["children"][$key] = $this->child->getOriginal();
                 break;
+
             default:
                 # code...
                 break;
         }
     }
 
-
     public function cancel($sectionName)
     {
         $key = '';
-        if(strpos($sectionName, "editChild") !==false){
-             $key=str_replace('editChild', '', $sectionName);
-             $this->child= FoldersService::get($this->folderId)["insureds"]["children"][$key];
+        if (strpos($sectionName, "editChild") !== false) {
+            $key = str_replace('editChild', '', $sectionName);
+            $this->child = FoldersService::get($this->folderId)["insureds"]["children"][$key];
         }
         $this->removeFromActivatedSection($sectionName);
 
@@ -156,9 +157,11 @@ class FormEdit extends Component
             case 'editSecondaryAsured':
                 $this->insureds["secondary"][0] = $this->secondary->getOriginal();
                 break;
-            case 'editChild'.$key:
+                
+            case 'editChild' . $key:
                 $this->insureds["children"][$key] = $this->child->getOriginal();
                 break;
+
             default:
                 # code...
                 break;
@@ -167,8 +170,6 @@ class FormEdit extends Component
 
     public function mount()
     {
-
- 
         // $this->folder = new Folder();
         // $this->insured = new Insured();
         // $this->enfant = new Insured();
@@ -179,18 +180,17 @@ class FormEdit extends Component
 
         //Insureds Data
         $this->insureds = FoldersService::get($this->folderId)["insureds"];
-        $this->primary = $this->insureds["primary"][0]??  new Insured();
+        $this->primary = $this->insureds["primary"][0] ??  new Insured();
         // dd($this->insureds);
-        $this->secondary = $this->insureds["secondary"][0]?? new Insured();
+        $this->secondary = $this->insureds["secondary"][0] ?? new Insured();
 
         $this->prelevement = $this->primary->jour_prelevement;
-        if(isset($this->insureds['children']))
-        $this->childTotal = count($this->insureds['children']) ?? 0;
+        if (isset($this->insureds['children']))
+            $this->childTotal = count($this->insureds['children']) ?? 0;
     }
 
     public function render()
     {
-
         return view('folder.form-edit');
     }
 }

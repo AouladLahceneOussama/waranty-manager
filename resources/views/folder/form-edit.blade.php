@@ -95,6 +95,49 @@
                     @enderror
                 </div>
 
+                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                    <div class="flex flex-wrap">
+                        <div class="w-2/3">
+                            <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="numero_adheration">
+                                {{ __('Numero adheration') }}
+                            </label>
+                            <input wire:model="folder.numero_adheration" type="text" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" 
+                                    placeholder="Numero adheration" id="numero_adheration" 
+                                    {{ !in_array('editGeneralInfo', $activatedSection) ? 'disabled' : '' }}
+                            />
+                            @error('folder.numero_adheration')
+                            <span class="text-red-500 text-xs italic">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="w-1/3 px-2">
+                            <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="statut">
+                                {{ __('Status') }}
+                            </label>
+                            <div class="flex  items-center">
+                                <label class="inline-flex relative items-center cursor-pointer">
+                                    <input  wire:model="checked" type="checkbox" value="COMPLET" class="sr-only peer"
+                                        {{ !in_array('editGeneralInfo', $activatedSection) ? 'disabled' : '' }}
+                                        >
+                                    <div
+                                        class="w-11 h-6 bg-gray-200 rounded-full peer  peer-checked:after:translate-x-full 
+                                        peer-checked:after:border-white  after:absolute after:top-0.5 after:left-[2px] 
+                                        after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  
+                                        peer-checked:bg-teal-600">
+                                    </div>
+                                    <span class="ml-3 text-sm font-medium text-gray-700 ">Dossier
+                                        Complet</span>
+
+                                </label>
+
+
+                                @error('folder.status')
+                                    <span class="text-red-500 text-xs italic">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="w-full  md:w-1/2 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="status">
                         {{ __('Status') }}

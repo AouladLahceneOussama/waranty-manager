@@ -76,8 +76,8 @@ class Form extends Component
     public function mount()
     {
         $this->folder = new Folder();
-        $this->insured = new Insured();
-        $this->enfant = new Insured();
+        // $this->insured = new Insured();
+        // $this->enfant = new Insured();
     }
 
     public function render()
