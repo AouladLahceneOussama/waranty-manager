@@ -70,6 +70,7 @@ class Form extends Component
         $this->folder->user_id = Auth::id();
         $this->folder->save();
         InsuredsService::create($this->insureds, $this->folder->id);
+        $this->emit("createMediaFolder", $this->folder->id);
     }
 
     public function mount()

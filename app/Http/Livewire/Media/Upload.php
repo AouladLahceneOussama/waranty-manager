@@ -10,7 +10,7 @@ class Upload extends Component
 {
     use WithFileUploads;
 
-    protected $listeners = ['folderCreated' => 'save'];
+    protected $listeners = ['createMediaFolder'];
 
     public $medias = [];
     public $allMedias = [];
@@ -24,7 +24,7 @@ class Upload extends Component
     public function updatedMedias($files)
     {
         $this->validate([
-            'medias.*' => 'mimes:txt,xlx,xls,pdf,docx,ai,png|max:2048', // 1MB Max
+            'medias.*' => 'mimes:txt,xlx,xls,pdf,docx,ai,png|max:2048', // 2MB Max
         ], [
             "mimes" => "L'extention de fichier n'est pas acceptable."
         ]);
@@ -42,9 +42,9 @@ class Upload extends Component
         }
     }
 
-    public function save($folder_id)
+    public function createMediaFolder($folder_id)
     {
-        MediasService::create($this->medias, $folder_id);
+        MediasService::create($this->allMedias, $folder_id);
     }
     
     public function delete($index)
