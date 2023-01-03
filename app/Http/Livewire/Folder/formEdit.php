@@ -137,19 +137,23 @@ class FormEdit extends Component
             case 'editGeneralInfo':
                 $this->folder->status =  $this->checked;
                 FoldersService::edit($this->folder->getAttributes(), $this->folder->id);
+                $this->sendNotification("Dossier", "modifie");
                 break;
 
             case 'editPrimaryAsured':
                 $this->insureds["primary"][0]["jour_prelevement"] = $this->prelevement;
                 InsuredsService::edit($this->insureds["primary"][0], $this->insureds["primary"][0]["id"]);
+                $this->sendNotification("Assure Principale", "modifie");
                 break;
             case 'editSecondaryAsured':
                 InsuredsService::edit($this->insureds["secondary"][0], $this->insureds["secondary"][0]["id"]);
+                $this->sendNotification("Assure Secondaire", "modifie");
                 break;
 
             case 'editChild' . $key:
                 //dd($this->insureds["children"][$key]);
                 InsuredsService::updateOrCreateChilds($this->insureds["children"], $this->folderId);
+                $this->sendNotification("Enfant", "cree ou modifie");
                 break;
 
             default:
@@ -224,5 +228,19 @@ class FormEdit extends Component
     public function render()
     {
         return view('folder.form-edit');
+    }
+
+    private function sendNotification($target, $action)
+    {
+        $this->emit('newResponse', [
+            'error' => false,
+            'redirect' => [
+                'ok' => false,
+                'url' => '/',
+                'msg' => ''
+            ],
+            'msg' => "$target est bien $action",
+            'data' => ""
+        ]);
     }
 }

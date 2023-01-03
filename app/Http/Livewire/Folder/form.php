@@ -74,7 +74,17 @@ class Form extends Component
         InsuredsService::create($this->insureds, $this->folder->id);
         
         $this->emit("createMediaFolder", $this->folder->id);
-        return redirect('folders/edit/'.$this->folder->id);
+        $this->emit('newResponse', [
+            'error' => false,
+            'redirect' => [
+                'ok' => true,
+                'url' => '/folders/edit/'.$this->folder->id,
+                'msg' => 'Modifier ce dossier.'
+            ],
+            'msg' => "Dossier et assure ont bien ajoutes",
+            'data' => ""
+        ]);
+        // return redirect('folders/edit/'.$this->folder->id);
     }
 
     public function mount()

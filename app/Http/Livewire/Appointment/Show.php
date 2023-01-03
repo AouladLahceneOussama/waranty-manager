@@ -33,5 +33,15 @@ class Show extends Component
     {
         AppointementsService::delete($appointment_id);
         $this->appointments = AppointementsService::get($this->folderId);
+        $this->emit('newResponse', [
+            'error' => false,
+            'redirect' => [
+                'ok' => false,
+                'url' => '/',
+                'msg' => ''
+            ],
+            'msg' => 'Rendez-vous est supprimer',
+            'data' => ""
+        ]);
     }
 }

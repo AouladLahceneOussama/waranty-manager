@@ -38,6 +38,17 @@ class Create extends Component
         $this->name = "";
         $this->date = "";
         $this->emit('AppointementAdded');
+
+        $this->emit('newResponse', [
+            'error' => false,
+            'redirect' => [
+                'ok' => false,
+                'url' => '/',
+                'msg' => ''
+            ],
+            'msg' => 'Rendez-vous est bien cree',
+            'data' => ""
+        ]);
     }
 
     public function startEditing($appointement)
@@ -61,6 +72,17 @@ class Create extends Component
         $this->updating = false;
         $this->name = "";
         $this->date = "";
+
+        $this->emit('newResponse', [
+            'error' => false,
+            'redirect' => [
+                'ok' => false,
+                'url' => '/',
+                'msg' => ''
+            ],
+            'msg' => 'Rendez-vous est bien modifie',
+            'data' => ""
+        ]);
 
         $this->emit('AppointementAdded');
     }

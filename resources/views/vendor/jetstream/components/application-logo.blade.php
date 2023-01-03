@@ -1,1 +1,1 @@
-<img src="/assets/bs2w-02.png" alt="BS2W">
+<img src="/assets/b2sw-logo.png" alt="BS2W">

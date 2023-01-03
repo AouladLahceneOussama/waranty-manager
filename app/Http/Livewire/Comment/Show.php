@@ -27,6 +27,16 @@ class Show extends Component
     {
         CommentsService::delete($comment_id);
         $this->comments = CommentsService::get($this->folderId);
+        $this->emit('newResponse', [
+            'error' => false,
+            'redirect' => [
+                'ok' => false,
+                'url' => '/',
+                'msg' => ''
+            ],
+            'msg' => 'Commentaire est bien supprimer',
+            'data' => ""
+        ]);
     }
 
     public function edit($comment_id)

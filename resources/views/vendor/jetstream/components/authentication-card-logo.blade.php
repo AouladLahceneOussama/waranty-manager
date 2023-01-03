@@ -1,3 +1,3 @@
 <a href="/">
-    <img src="/assets/bs2w-02.png" class="w-48" alt="BS2W">
+    <img src="/assets/b2sw-logo.png" class="w-48" alt="BS2W">
 </a>

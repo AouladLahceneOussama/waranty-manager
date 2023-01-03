@@ -36,6 +36,16 @@ class Create extends Component
         ], $this->folderId);
 
         $this->emit('CommentAdded');
+        $this->emit('newResponse', [
+            'error' => false,
+            'redirect' => [
+                'ok' => false,
+                'url' => '/',
+                'msg' => ''
+            ],
+            'msg' => 'Commentaire est bien cree',
+            'data' => ""
+        ]);
     }
 
     public function startCommentEditing($comment)
@@ -61,6 +71,16 @@ class Create extends Component
         $this->status = "";
 
         $this->emit('CommentAdded');
+        $this->emit('newResponse', [
+            'error' => false,
+            'redirect' => [
+                'ok' => false,
+                'url' => '/',
+                'msg' => ''
+            ],
+            'msg' => 'Commentaire est bien modifie',
+            'data' => ""
+        ]);
     }
 
     public function cancelEdit()

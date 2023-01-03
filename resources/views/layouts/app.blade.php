@@ -29,7 +29,7 @@
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class=" text-white	 bg-teal-600 bg-opacity-90 shadow">
+                <header class="text-white bg-teal-600 bg-opacity-90 shadow">
                     <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 ">
                         {{ $header }}
                     </div>
@@ -41,6 +41,8 @@
                 {{ $slot }}
             </main>
         </div>
+
+        <livewire:components.response />
 
         @stack('modals')
 
