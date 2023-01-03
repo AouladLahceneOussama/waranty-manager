@@ -34,31 +34,6 @@
             </div>
 
             <div class="flex flex-wrap -mx-3 mb-4">
-
-                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="cotisation_ht">
-                        {{ __('Cotisation HT') }}
-                    </label>
-                    <input wire:model="folder.cotisation_ht" type="number" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Cotisation en HT" id="cotisation_ht" />
-                    @error('folder.cotisation_ht')
-                    <span class="text-red-500 text-xs italic">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="cotisation_ttc">
-                        {{ __('Cotisation TTC') }}
-                    </label>
-                    <input wire:model="folder.cotisation_ttc" type="number" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Cotisation en TTC" id="cotisation_ttc" />
-                    @error('folder.cotisation_ttc')
-                    <span class="text-red-500 text-xs italic">{{ $message }}</span>
-                    @enderror
-                </div>
-
-            </div>
-
-            <div class="flex flex-wrap -mx-3 mb-4">
-
                 <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="date_effet">
                         {{ __('Date d\'effet') }}
@@ -70,33 +45,44 @@
                 </div>
 
                 <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <div class="flex flex-wrap">
-                        <div class="w-2/3">
-                            <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="numero_adheration">
-                                {{ __('Numero adheration') }}
-                            </label>
-                            <input wire:model="folder.numero_adheration" type="text" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Numero adheration" id="numero_adheration" />
-                            @error('folder.numero_adheration')
-                            <span class="text-red-500 text-xs italic">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="w-1/3 px-2">
-                            <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="statut">
-                                {{ __('Status') }}
-                            </label>
-                            <div class="flex  items-center">
-                                <label class="inline-flex relative items-center cursor-pointer">
-                                    <input wire:model="folder.status" type="checkbox" value="COMPLET" class="sr-only peer">
-                                    <div class="w-11 h-6 bg-gray-200 rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-teal-600">
-                                    </div>
-                                    <span class="ml-3 text-sm font-medium text-gray-700 ">Dossier
-                                        Complet</span>
-                                </label>
-                                @error('folder.statut')
-                                <span class="text-red-500 text-xs italic">{{ $message }}</span>
-                                @enderror
+                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="cotisation_ht">
+                        {{ __('Cotisation') }}
+                    </label>
+                    <input wire:model="folder.cotisation_ht" type="number" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Cotisation en HT" id="cotisation_ht" />
+                    @error('folder.cotisation_ht')
+                    <span class="text-red-500 text-xs italic">{{ $message }}</span>
+                    @enderror
+                </div>
+
+            </div>
+
+            <div class="flex flex-wrap -mx-3 mb-4">
+
+                  <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="numero_adheration">
+                        {{ __('Numero adheration') }}
+                    </label>
+                    <input wire:model="folder.numero_adheration" type="text" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Numero adheration" id="numero_adheration" />
+                    @error('folder.numero_adheration')
+                    <span class="text-red-500 text-xs italic">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="statut">
+                        {{ __('Status') }}
+                    </label>
+                    <div class="flex  items-center">
+                        <label class="inline-flex relative items-center cursor-pointer">
+                            <input wire:model="folder.status" type="checkbox" value="COMPLET" class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-200 rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-teal-600">
                             </div>
-                        </div>
+                            <span class="ml-3 text-sm font-medium text-gray-700 ">Dossier
+                                Complet</span>
+                        </label>
+                        @error('folder.statut')
+                        <span class="text-red-500 text-xs italic">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
             </div>
@@ -202,7 +188,6 @@
                     <select wire:model="insureds.primary.etat_civil" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Etat civil" id="etat_civil">
                         <option value="célibataire">célibataire</option>
                         <option value="marié(e)">marié(e)</option>
-                        <option value="cohabitant(e)">cohabitant(e)</option>
                     </select>
                     @error('etat_civil')
                     <span class="text-red-500 text-xs italic">{{ $message }}</span>

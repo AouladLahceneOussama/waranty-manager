@@ -190,11 +190,8 @@
                             </td>
                             <td class="p-2 text-left align-middle whitespace-nowrap ">
                                 <p wire:loading.remove class="font-semibold leading-tight text-xs text-slate-700">
-                                    {{ $folder->cotisation_ht }}<strong class="font-bold text-slate-900"> HT</strong>
+                                    {{ $folder->cotisation_ht }} EUR 
                                 </p>
-                                <p wire:loading.remove class="font-semibold leading-tight text-xs text-slate-700">
-                                    {{ $folder->cotisation_ttc }}<strong class="font-bold text-slate-900">
-                                        TTC</strong></p>
                                 <p wire:loading
                                     class="w-{{ $skeletonWidths[rand(0, count($skeletonWidths) - 1)] }} animate-pulse bg-gray-400 h-3 rounded-full">
                                 </p>

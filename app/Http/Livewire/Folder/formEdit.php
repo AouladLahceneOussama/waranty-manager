@@ -70,7 +70,7 @@ class FormEdit extends Component
 
     public function addChild()
     {
-        $this->insureds['children'][$this->childTotal] = [
+        $this->insureds['children'][] = [
             // "folder_id" => $this->folderId,
             "id" => "",
             "nom" => "",
@@ -80,7 +80,7 @@ class FormEdit extends Component
             "code_securite_social" => "",
         ];
 
-
+        
         $this->addToActivatedSection('editChild' . $this->childTotal);
         $this->childTotal++;
     }
@@ -91,20 +91,20 @@ class FormEdit extends Component
         $childskey = [];
         foreach ($this->activatedSection as $activated) {
             if (str_contains($activated, "editChild")) {
-                array_push($childskey, str_replace("editChild", '',$activated));
+                array_push($childskey, str_replace("editChild", '', $activated));
             }
         }
-       foreach($childskey as $childKey){
-        if($childKey>$key){
-           $this->activatedSection =  array_replace( $this->activatedSection,
-           array_fill_keys(
-               array_keys( $this->activatedSection, "editChild".$childKey),
-               "editChild".$childKey-1
-           )
-       );
+        foreach ($childskey as $childKey) {
+            if ($childKey > $key) {
+                $this->activatedSection =  array_replace(
+                    $this->activatedSection,
+                    array_fill_keys(
+                        array_keys($this->activatedSection, "editChild" . $childKey),
+                        "editChild" . $childKey - 1
+                    )
+                );
+            }
         }
-       }
-      
     }
     public function removeChild($key)
     {
@@ -169,13 +169,10 @@ class FormEdit extends Component
             $key = str_replace('editChild', '', $sectionName);
             try {
                 $this->child = FoldersService::get($this->folderId)["insureds"]["children"][$key];
-            } catch (\Throwable $th)  {
+            } catch (\Throwable $th) {
                 $this->removeChild($key);
                 return;
             }
-     
-       
-            
         }
         $this->removeFromActivatedSection($sectionName);
 
@@ -222,7 +219,9 @@ class FormEdit extends Component
 
         $this->prelevement = $this->primary->jour_prelevement;
         if (isset($this->insureds['children']))
-            $this->childTotal = count($this->insureds['children']) ?? 0;
+            $this->childTotal = count($this->insureds['children']);
+        else
+        $this->childTotal = 0;
     }
 
     public function render()
