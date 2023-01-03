@@ -22,7 +22,7 @@ class FormEdit extends Component
     public Folder $folder;
     public Insured $primary;
     public Insured $secondary;
-    public Insured $chil;
+    public Insured $child;
     public $insureds;
 
     //ckeckbox And radio :model
@@ -163,8 +163,15 @@ class FormEdit extends Component
         $key = '';
         if (strpos($sectionName, "editChild") !== false) {
             $key = str_replace('editChild', '', $sectionName);
-            $this->child = FoldersService::get($this->folderId)["insureds"]["children"][$key] ?? $this->removeChild($key);
-            return;
+            try {
+                $this->child = FoldersService::get($this->folderId)["insureds"]["children"][$key];
+            } catch (\Throwable $th)  {
+                $this->removeChild($key);
+                return;
+            }
+     
+       
+            
         }
         $this->removeFromActivatedSection($sectionName);
 
