@@ -86,7 +86,7 @@
                             </label>
                             <div class="flex  items-center">
                                 <label class="inline-flex relative items-center cursor-pointer">
-                                    <input wire:model="folder.status" type="checkbox" value="" class="sr-only peer">
+                                    <input wire:model="folder.status" type="checkbox" value="COMPLET" class="sr-only peer">
                                     <div class="w-11 h-6 bg-gray-200 rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-teal-600">
                                     </div>
                                     <span class="ml-3 text-sm font-medium text-gray-700 ">Dossier
@@ -273,16 +273,16 @@
                         {{ __('Jour de prélèvement') }}
                     </label>
                     <div class="flex items-center">
-                        <input wire:model="insureds.primary.jours_prelevement" id="disabled-radio-2" type="radio" value="5" name="disabled-radio" class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-blue-500   focus:ring-2">
+                        <input wire:model="insureds.primary.jour_prelevement" id="disabled-radio-2" type="radio" value="5" name="disabled-radio" class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-blue-500   focus:ring-2">
                         <label for="disabled-radio-2" class="mx-2 text-sm font-medium text-gray-700 ">5</label>
 
-                        <input wire:model="insureds.primary.jours_prelevement" id="disabled-radio-2" type="radio" value="10" name="disabled-radio" class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-blue-500   focus:ring-2">
+                        <input wire:model="insureds.primary.jour_prelevement" id="disabled-radio-2" type="radio" value="10" name="disabled-radio" class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-blue-500   focus:ring-2">
                         <label for="disabled-radio-2" class="mx-2 text-sm font-medium text-gray-700 ">10</label>
 
-                        <input wire:model="insureds.primary.jours_prelevement" id="disabled-radio-2" type="radio" value="15" name="disabled-radio" class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-blue-500   focus:ring-2">
+                        <input wire:model="insureds.primary.jour_prelevement" id="disabled-radio-2" type="radio" value="15" name="disabled-radio" class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-blue-500   focus:ring-2">
                         <label for="disabled-radio-2" class="mx-2 text-sm font-medium text-gray-700 ">15</label>
                     </div>
-                    @error('jours_prelevement')
+                    @error('jour_prelevement')
                     <span class="text-red-500 text-xs italic">{{ $message }}</span>
                     @enderror
                 </div>

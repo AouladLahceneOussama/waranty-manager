@@ -44,7 +44,7 @@ class Form extends Component
         "insureds.*.secondary_phone" => "required|string",
         "insureds.*.email" => "required|string",
         "insureds.*.iban" => "required|string",
-        "insureds.*.jours_prelevement" => "required|string",
+        "insureds.*.jour_prelevement" => "required|string",
     ];
 
     public function addChild()
@@ -67,10 +67,14 @@ class Form extends Component
     public function create()
     {
         //$this->validate();
+        
         $this->folder->user_id = Auth::id();
+        $this->folder->status = $this->folder->status == null ? "INCOMPLET" : "COMPLET";
         $this->folder->save();
         InsuredsService::create($this->insureds, $this->folder->id);
+        
         $this->emit("createMediaFolder", $this->folder->id);
+        return redirect('folders/edit/'.$this->folder->id);
     }
 
     public function mount()
