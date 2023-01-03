@@ -21,16 +21,18 @@ class Show extends Component
         "numero_adheration" => null,
         "phone" => null,
         "email" => null,
-        "date_effet_start" => null,
-        "date_effet_end" => null,
+        "client" => null
+        // "date_effet_start" => null,
+        // "date_effet_end" => null,
     ];
 
     protected $rules = [
         "filters.compagnie" => "nullable|string",
         "filters.numero_adheration" => "nullable|string",
         "filters.email" => "nullable|email",
-        "filters.date_effet_start" => "nullable|date",
-        "filters.date_effet_end" => "nullable|required_with:date_effet_start|date|after_or_equal:date_effet_start",
+        // "filters.date_effet_start" => "nullable|date",
+        // "filters.date_effet_end" => "nullable|required_with:date_effet_start|date|after_or_equal:date_effet_start",
+        "filters.nom_client" => "nullable|string",
     ];
 
     public function sortBy($column)
@@ -74,7 +76,7 @@ class Show extends Component
     {
         $this->validate();
         $this->filterQuery = "";
-        $this->filters["date_effet"] = !isset($this->filters["date_effet_start"]) ? null : $this->filters["date_effet_start"] . ',' . $this->filters["date_effet_end"];
+        // $this->filters["date_effet"] = !isset($this->filters["date_effet_start"]) ? null : $this->filters["date_effet_start"] . ',' . $this->filters["date_effet_end"];
 
         foreach ($this->filters as $filter => $value) {
             if ($value == null) continue;

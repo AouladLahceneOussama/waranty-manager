@@ -98,7 +98,7 @@ class FoldersService
     public static function search(string $query, array $options)
     {
         // $query = DATE_EFFET::date1,date2,COMPAGNIE::samsung,PHONE::34130320932,EMAIL::asdasd@test.com,NUMERO_ADHERATION::isjfdaisjd
-        $folders = Folder::query();
+        $folders = Folder::select("f.*")->from("folders as f");
         $queries = explode(",", $query);
 
         foreach ($queries as $q) {
@@ -107,6 +107,13 @@ class FoldersService
             $value = urldecode($search[1]);
 
             switch ($column) {
+                case "NOM_CLIENT":
+                    $folders = $folders->join('insureds as i3', function ($join){
+                        $join->on('f.id', '=', 'i3.folder_id');
+                    });
+                    $folders->where('i3.nom', 'LIKE', "%$value%")->orWhere('i3.prenom', 'LIKE', "%$value%");
+                    break;
+
                 case "DATE_EFFET":
                     $folders = $folders->whereBetween(strtolower($column), explode(",", $value));
                     break;
@@ -117,17 +124,16 @@ class FoldersService
 
                 case "PHONE":
                     $folders = $folders->join('insureds as i1', function ($join) use($value){
-                        $join->on('folders.id', '=', 'i1.folder_id')
-                             ->where('i1.primary_phone', 'LIKE', "%$value%")
-                             ->orWhere('i1.secondary_phone', 'LIKE', "%$value%");
+                        $join->on('f.id', '=', 'i1.folder_id');
                     });
+                    $folders->where('i1.primary_phone', 'LIKE', "%$value%")->orWhere('i1.secondary_phone', 'LIKE', "%$value%");
                     break;
 
                 case "EMAIL":
                     $folders = $folders->join('insureds as i2', function ($join) use($value){
-                        $join->on('folders.id', '=', 'i2.folder_id')
-                             ->where('i2.email', 'LIKE', "%$value%");
+                        $join->on('f.id', '=', 'i2.folder_id');
                     });
+                    $folders->where('i2.email', 'LIKE', "%$value%");
                     break;
 
                 case "NUMERO_ADHERATION":
@@ -139,7 +145,7 @@ class FoldersService
             }
         }
 
-        $folders =  $folders->orderBy('folders.'.$options["orderBy"], $options["orderDirection"])->paginate($options["limit"]);
+        $folders = $folders->orderBy('f.'.$options["orderBy"], $options["orderDirection"])->paginate($options["limit"]);
         return $folders;
     }
 }
