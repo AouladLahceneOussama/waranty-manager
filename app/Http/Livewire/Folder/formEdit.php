@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Folder;
 use App\Models\Folder;
 use App\Models\Insured;
 use App\Services\FoldersService;
+use App\Services\InsuredsService;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -69,7 +70,9 @@ class FormEdit extends Component
 
     public function addChild()
     {
-        $this->insureds['children'][] = [
+        $this->insureds['children'][$this->childTotal] = [
+            // "folder_id" => $this->folderId,
+            "id" => "",
             "nom" => "",
             "prenom" => "",
             "date_naissance" => "",
@@ -82,8 +85,31 @@ class FormEdit extends Component
         $this->childTotal++;
     }
 
+    private function replaceKeys($key)
+    {
+
+        $childskey = [];
+        foreach ($this->activatedSection as $activated) {
+            if (str_contains($activated, "editChild")) {
+                array_push($childskey, str_replace("editChild", '',$activated));
+            }
+        }
+       foreach($childskey as $childKey){
+        if($childKey>$key){
+           $this->activatedSection =  array_replace( $this->activatedSection,
+           array_fill_keys(
+               array_keys( $this->activatedSection, "editChild".$childKey),
+               "editChild".$childKey-1
+           )
+       );
+        }
+       }
+      
+    }
     public function removeChild($key)
     {
+        $this->replaceKeys($key);
+        InsuredsService::delete($this->insureds['children'][$key]["id"]);
         unset($this->insureds['children'][$key]);
         $this->insureds['children'] = array_values($this->insureds['children']);
         $this->childTotal--;
@@ -103,7 +129,6 @@ class FormEdit extends Component
         $key = '';
         if (strpos($sectionName, "editChild") !== false) {
             $key = str_replace('editChild', '', $sectionName);
-            $this->child = FoldersService::get($this->folderId)["insureds"]["children"][$key];
         }
 
         $this->removeFromActivatedSection($sectionName);
@@ -115,16 +140,16 @@ class FormEdit extends Component
                 break;
 
             case 'editPrimaryAsured':
-                $this->insureds["primary"][0] = $this->primary->getOriginal();
-                $this->prelevement = $this->primary->jour_prelevement;
+                $this->insureds["primary"][0]["jour_prelevement"] = $this->prelevement;
+                InsuredsService::edit($this->insureds["primary"][0], $this->insureds["primary"][0]["id"]);
                 break;
-
             case 'editSecondaryAsured':
-                $this->insureds["secondary"][0] = $this->secondary->getOriginal();
+                InsuredsService::edit($this->insureds["secondary"][0], $this->insureds["secondary"][0]["id"]);
                 break;
 
             case 'editChild' . $key:
-                $this->insureds["children"][$key] = $this->child->getOriginal();
+                //dd($this->insureds["children"][$key]);
+                InsuredsService::updateOrCreateChilds($this->insureds["children"], $this->folderId);
                 break;
 
             default:
@@ -138,7 +163,8 @@ class FormEdit extends Component
         $key = '';
         if (strpos($sectionName, "editChild") !== false) {
             $key = str_replace('editChild', '', $sectionName);
-            $this->child = FoldersService::get($this->folderId)["insureds"]["children"][$key];
+            $this->child = FoldersService::get($this->folderId)["insureds"]["children"][$key] ?? $this->removeChild($key);
+            return;
         }
         $this->removeFromActivatedSection($sectionName);
 
@@ -156,7 +182,7 @@ class FormEdit extends Component
             case 'editSecondaryAsured':
                 $this->insureds["secondary"][0] = $this->secondary->getOriginal();
                 break;
-                
+
             case 'editChild' . $key:
                 $this->insureds["children"][$key] = $this->child->getOriginal();
                 break;

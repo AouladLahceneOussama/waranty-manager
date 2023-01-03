@@ -50,7 +50,7 @@
         </div>
         @empty
         <div>
-            Il n y a pas de messages pour ce dossier.
+            Il n'y a aucun commentaire pour le moment.
         </div>
         @endforelse
     </div>

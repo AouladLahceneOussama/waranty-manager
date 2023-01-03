@@ -18,7 +18,7 @@
         </div>
         @empty
         <div>
-            Il n y a pas de rendez-vous pour ce dossier.
+            Il n'y a pas de rendez-vous pour ce moment.
         </div>
         @endforelse
     </div>

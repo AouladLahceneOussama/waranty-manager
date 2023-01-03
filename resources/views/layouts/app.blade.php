@@ -24,13 +24,13 @@
     <body class="font-sans antialiased">
         <x-jet-banner />
 
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen">
             @livewire('navigation-menu')
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <header class=" text-white	 bg-teal-600 bg-opacity-90 shadow">
+                    <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 ">
                         {{ $header }}
                     </div>
                 </header>
@@ -46,4 +46,9 @@
 
         @livewireScripts
     </body>
+    <footer class=" text-white	 bg-teal-600 bg-opacity-90 text-center shadow">
+        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 ">
+            @copyright 2023
+        </div>
+    </footer>
 </html>

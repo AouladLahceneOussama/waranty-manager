@@ -401,7 +401,7 @@
             </div>
 
             @if (in_array('editPrimaryAsured', $activatedSection))
-                <button
+                <button wire:click.prevent="save('editPrimaryAsured')"
                     class="mb-2 px-8 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-700 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
                     {{ __('Enregistrer') }}
                 </button>
@@ -512,7 +512,7 @@
                 </div>
             </div>
             @if (in_array('editSecondaryAsured', $activatedSection))
-                <button
+                <button wire:click.prevent="save('editSecondaryAsured')"
                     class="mb-2 px-8 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-700 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
                     {{ __('Enregistrer') }}
                 </button>
@@ -642,7 +642,7 @@
                         </div>
 
                         @if (in_array('editChild' . $key, $activatedSection))
-                            <button
+                            <button wire:click.prevent="save('editChild{{ $key }}')"
                                 class="mb-2 px-8 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-700 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
                                 {{ __('Enregistrer') }}
                             </button>

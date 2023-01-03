@@ -40,7 +40,7 @@ class FoldersService
     public static function create(array $data)
     {
         $folder = new Folder();
-        $folder->compagnie = $data["numero_adheration"];
+        $folder->numero_adheration = $data["numero_adheration"];
         $folder->compagnie = $data["compagnie"];
         $folder->souscripteur = $data["souscripteur"];
         $folder->date_effet = $data["date_effet"];
@@ -62,7 +62,8 @@ class FoldersService
         $folder->cotisation_ttc = $data["cotisation_ttc"];
         $folder->date_effet = $data["date_effet"];
         $folder->souscripteur = $data["souscripteur"];
-        $folder->comment = $data["comment"] ?? null;
+        $folder->numero_adheration = $data["numero_adheration"];
+        // $folder->comment = $data["comment"] ?? null;
         $folder->status = $data["status"] == "" ? "INCOMPLET" : "COMPLET";
         $folder->save();
 

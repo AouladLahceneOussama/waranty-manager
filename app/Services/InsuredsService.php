@@ -101,14 +101,25 @@ class InsuredsService
 
     public static function updateOrCreateChilds(array $childs, int $folder_id)
     {
-        $existingChilds = [];
+      //  dd($childs);
+        $notExistingChilds = [];
 
         foreach ($childs as $child) {
-            $insured = Insured::find($child->id);
-            if (!$insured) self::edit($child, $child->id);
-            else $existingChilds[] = $child;
+     
+            if (Insured::find($child["id"])) self::edit($child, $child["id"]);
+            else $notExistingChilds[] = $child;
         }
 
-        self::createChilds($existingChilds, $folder_id);
+        self::createChilds($notExistingChilds, $folder_id);
     }
+
+    public static function delete($child_id)
+    {
+        $child = Insured::find($child_id);
+        if (!$child) return false;
+
+        Insured::where("id", $child_id)->delete();
+        return true;
+    }
+
 }

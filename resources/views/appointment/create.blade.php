@@ -29,7 +29,7 @@
             @else
             <div class="flex justify-center items-center">
                 <button wire:click.prevent="edit" class="w-full md:w-1/2 px-4 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase hover:bg-teal-700 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
-                    {{ __('Modifier rendez-vous') }}
+                    {{ __('Enregistrer') }}
                 </button>
                 <button wire:click.prevent="cancelEdit" class="w-full md:w-1/2 px-4 py-2 bg-red-600 border rounded-md font-semibold text-xs text-white uppercase hover:bg-red-700 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
                     {{ __('Annuler') }}
