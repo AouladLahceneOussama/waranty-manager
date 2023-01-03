@@ -115,6 +115,10 @@
             Livewire.on('startCommentEditing', (comment) => {
                 document.querySelector("#richComment").contentDocument.body.innerHTML = comment.comment
             })
+
+            Livewire.on('cancelCommentEditing', (comment) => {
+                document.querySelector("#richComment").contentDocument.body.innerHTML = ""
+            })
         }
     </script>
 </div>

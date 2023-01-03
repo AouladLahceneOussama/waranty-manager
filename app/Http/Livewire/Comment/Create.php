@@ -65,8 +65,10 @@ class Create extends Component
 
     public function cancelEdit()
     {
-        $this->name = "";
-        $this->date = "";
+        $this->comment = "";
+        $this->status = "";
         $this->updating = false;
+
+        $this->emit('cancelCommentEditing');
     }
 }
