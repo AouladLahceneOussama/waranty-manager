@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string("souscripteur");
             $table->date("date_effet");
             $table->float("cotisation_ht");
-            $table->float("cotisation_ttc");
             $table->string("status")->default("INCOMPLET");
             $table->timestamps();
         });

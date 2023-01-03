@@ -23,7 +23,6 @@ class FolderFactory extends Factory
             "souscripteur" => $this->faker->text(10),
             "date_effet" => $this->faker->date(),
             "cotisation_ht" => $this->faker->numberBetween(100, 1000),
-            "cotisation_ttc" => $this->faker->numberBetween(1000, 5000),
             "status" => "INCOMPLET",
         ];
     }
