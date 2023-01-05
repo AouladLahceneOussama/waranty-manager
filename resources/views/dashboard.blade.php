@@ -7,6 +7,13 @@
 
     <div class="py-12 bg-[url('https://www.looknbe.com/wp-content/uploads/2021/10/assurance-sante.jpg')] bg-no-repeat bg-cover bg-center bg-fixed">
         <div class="max-w-7xl mx-auto py-4 px-6 lg:px-8 bg-white bg-opacity-60 rounded">
+            
+            <div>number of users or admins in the app : {{ $statistics["users"] }}</div>
+            <div>number of folders group by status :{{ $statistics["folders"] }}</div>
+            <div>number of comments grouped by their status :{{ $statistics["comments"] }}</div>
+            <div>number of appointments :{{ $statistics["appointments"] }}</div>
+        </div>
+        <div class="max-w-7xl mx-auto py-4 px-6 lg:px-8 bg-white bg-opacity-60 rounded">
             @forelse($comments as $comment)
             <div>This is how to get the folder data</div>
             <div>{{ $comment->comment }}</div>

@@ -11,8 +11,8 @@ class DashboardController extends Controller
     {
         $comments = DashboardService::getUrgentComments();
         $appointments = DashboardService::getCloserAppointment();
-        // dd($appointments, $comments);
+        $statistics = DashboardService::statistics();
 
-        return view("dashboard", compact('comments', 'appointments'));
+        return view("dashboard", compact('comments', 'appointments', 'statistics'));
     }
 }
