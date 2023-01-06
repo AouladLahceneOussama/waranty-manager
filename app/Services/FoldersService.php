@@ -45,7 +45,7 @@ class FoldersService
         $folder->souscripteur = $data["souscripteur"];
         $folder->date_effet = $data["date_effet"];
         $folder->cotisation_ht = $data["cotisation_ht"];
-        $folder->cotisation_ttc = $data["cotisation_ttc"];
+        // $folder->cotisation_ttc = $data["cotisation_ttc"];
         $folder->status = $data["status"] ?? "INCOMPLET";
         $folder->save();
 
@@ -59,7 +59,7 @@ class FoldersService
 
         $folder->compagnie = $data["compagnie"];
         $folder->cotisation_ht = $data["cotisation_ht"];
-        $folder->cotisation_ttc = $data["cotisation_ttc"];
+        // $folder->cotisation_ttc = $data["cotisation_ttc"];
         $folder->date_effet = $data["date_effet"];
         $folder->souscripteur = $data["souscripteur"];
         $folder->numero_adheration = $data["numero_adheration"];
@@ -87,7 +87,7 @@ class FoldersService
     {
         $folders = Folder::where('compagnie', 'LIKE', "%{$query}%") 
         ->orWhere('cotisation_ht', 'LIKE', "%{$query}%") 
-        ->orWhere('cotisation_ttc', 'LIKE', "%{$query}%") 
+        // ->orWhere('cotisation_ttc', 'LIKE', "%{$query}%") 
         ->orWhere('status', 'LIKE', "%{$query}%") 
         ->orderBy($options["orderBy"], $options["orderDirection"])
         ->paginate($options["limit"]);

@@ -25,7 +25,7 @@
                     <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="souscripteur">
                         {{ __('Souscripteur') }}
                     </label>
-                    <input wire:model="folder.souscripteur" type="text" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Souscripteur" id="souscripteur" />
+                    <input wire:model="folder.souscripteur" type="text" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Nom prénom" id="souscripteur" />
                     @error('folder.souscripteur')
                     <span class="text-red-500 text-xs italic">{{ $message }}</span>
                     @enderror
@@ -38,7 +38,7 @@
                     <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="date_effet">
                         {{ __('Date d\'effet') }}
                     </label>
-                    <input wire:model="folder.date_effet" type="date" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Cotisation en HT" id="date_effet" />
+                    <input wire:model="folder.date_effet" type="date" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="date d'effet" id="date_effet" />
                     @error('folder.date_effet')
                     <span class="text-red-500 text-xs italic">{{ $message }}</span>
                     @enderror
@@ -48,7 +48,7 @@
                     <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="cotisation_ht">
                         {{ __('Cotisation') }}
                     </label>
-                    <input wire:model="folder.cotisation_ht" type="number" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Cotisation en HT" id="cotisation_ht" />
+                    <input wire:model="folder.cotisation_ht" type="number" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Cotisation" id="cotisation_ht" />
                     @error('folder.cotisation_ht')
                     <span class="text-red-500 text-xs italic">{{ $message }}</span>
                     @enderror
@@ -60,9 +60,9 @@
 
                   <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="numero_adheration">
-                        {{ __('Numero adheration') }}
+                        {{ __('Numero d\'adhesion') }}
                     </label>
-                    <input wire:model="folder.numero_adheration" type="text" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Numero adheration" id="numero_adheration" />
+                    <input wire:model="folder.numero_adheration" type="text" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Numero d'adhesion" id="numero_adheration" />
                     @error('folder.numero_adheration')
                     <span class="text-red-500 text-xs italic">{{ $message }}</span>
                     @enderror
@@ -101,24 +101,29 @@
             <div class="flex flex-wrap -mx-3 mb-4">
 
                 <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="civilite">
+                        {{ __('Civilité') }}
+                    </label>
+                    <select wire:model="insureds.primary.civilite" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Date de naissance" id="civilite">
+                        <option value="M.">M.</option>
+                        <option value="Mme">Mme</option>
+                        <option value="Mlle">Mlle</option>
+                    </select>
+                    @error('civilite')
+                    <span class="text-red-500 text-xs italic">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="nom">
-                        {{ __('Nom de famille') }}
+                        {{ __('Nom') }}
                     </label>
                     <input wire:model="insureds.primary.nom" type="text" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Nom de l'assuré" id="nom" />
                     @error('nom')
                     <span class="text-red-500 text-xs italic">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="nom_jf">
-                        {{ __('Nom de jeune fille') }}
-                    </label>
-                    <input wire:model="insureds.primary.nom_jeune_fille" type="text" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Nom_jf de l'assuré" id="nom_jf" />
-                    @error('nom_jeune_fille')
-                    <span class="text-red-500 text-xs italic">{{ $message }}</span>
-                    @enderror
-                </div>
-
+                
                 <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="prenom">
                         {{ __('Prénom') }}
@@ -143,60 +148,6 @@
                 </div>
 
                 <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="pays_naissance">
-                        {{ __('Pays de naissance') }}
-                    </label>
-                    <input wire:model="insureds.primary.pays_naissance" type="text" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Pays de naissance" id="pays_naissance" />
-                    @error('pays_naissance')
-                    <span class="text-red-500 text-xs italic">{{ $message }}</span>
-                    @enderror
-                </div>
-
-
-
-                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="departement_naissance">
-                        {{ __('Département de naissance') }}
-                    </label>
-                    <input wire:model="insureds.primary.departement_naissance" type="text" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Département de naissance" id="departement_naissance" />
-                    @error('departement_naissance')
-                    <span class="text-red-500 text-xs italic">{{ $message }}</span>
-                    @enderror
-                </div>
-
-            </div>
-
-            <div class="flex flex-wrap -mx-3 mb-4">
-                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="civilite">
-                        {{ __('Civilité') }}
-                    </label>
-                    <select wire:model="insureds.primary.civilite" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Date de naissance" id="civilite">
-                        <option value="M.">M.</option>
-                        <option value="Mme">Mme</option>
-                        <option value="Mlle">Mlle</option>
-                    </select>
-                    @error('civilite')
-                    <span class="text-red-500 text-xs italic">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                    <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="etat_civil">
-                        {{ __('Etat civil') }}
-                    </label>
-                    <select wire:model="insureds.primary.etat_civil" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Etat civil" id="etat_civil">
-                        <option value="célibataire">célibataire</option>
-                        <option value="marié(e)">marié(e)</option>
-                    </select>
-                    @error('etat_civil')
-                    <span class="text-red-500 text-xs italic">{{ $message }}</span>
-                    @enderror
-                </div>
-
-
-
-                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="code_securite_social">
                         {{ __('Code securité social') }}
                     </label>
@@ -205,8 +156,9 @@
                     <span class="text-red-500 text-xs italic">{{ $message }}</span>
                     @enderror
                 </div>
-
             </div>
+
+        
             <div class="flex flex-wrap -mx-3 mb-4">
 
                 <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -287,7 +239,7 @@
 
                 <div class="flex flex-wrap -mx-3 mb-4">
 
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="nom">
                             {{ __('Nom de famille') }}
                         </label>
@@ -297,7 +249,7 @@
                         @enderror
                     </div>
 
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="prenom">
                             {{ __('Prénom') }}
                         </label>
@@ -310,7 +262,7 @@
                 </div>
 
                 <div class="flex flex-wrap -mx-3 mb-4">
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="date_naissance">
                             {{ __('Date de naissance') }}
                         </label>
@@ -319,7 +271,7 @@
                         <span class="text-red-500 text-xs italic">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="civilite">
                             {{ __('Civilité') }}
                         </label>
@@ -332,15 +284,7 @@
                         <span class="text-red-500 text-xs italic">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="code_securite_social">
-                            {{ __('Code securité social') }}
-                        </label>
-                        <input wire:model="insureds.secondary.code_securite_social" type="text" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Code securité social" id="code_securite_social" />
-                        @error('code_securite_social')
-                        <span class="text-red-500 text-xs italic">{{ $message }}</span>
-                        @enderror
-                    </div>
+                    
 
 
 
@@ -374,9 +318,23 @@
 
                     <div class="flex flex-wrap -mx-3 mb-4">
 
-                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="civilite_enf_{{ $key }}">
+                                {{ __('Civilité') }}
+                            </label>
+                            <select wire:model="insureds.children.{{ $key }}.civilite" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Date de naissance" id="civilite_enf_{{ $key }}">
+                                <option value="M.">M.</option>
+                                {{-- <option value="Mme">Mme</option> --}}
+                                <option value="Mlle">Mlle</option>
+                            </select>
+                            @error('civilite_enf_{{ $key }}')
+                            <span class="text-red-500 text-xs italic">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                             <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="nom_enf_{{ $key }}">
-                                {{ __('Nom de famille') }}
+                                {{ __('Nom') }}
                             </label>
                             <input wire:model="insureds.children.{{ $key }}.nom" type="text" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Nom de l'assuré" id="nom_enf_{{ $key }}" />
                             @error('nom_enf_{{ $key }}')
@@ -384,7 +342,13 @@
                             @enderror
                         </div>
 
-                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                       
+
+                    </div>
+
+                    <div class="flex flex-wrap -mx-3 mb-4">
+
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                             <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="prenom_enf_{{ $key }}">
                                 {{ __('Prénom') }}
                             </label>
@@ -394,10 +358,7 @@
                             @enderror
                         </div>
 
-                    </div>
-
-                    <div class="flex flex-wrap -mx-3 mb-4">
-                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                             <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="date_naissance__enf_{{ $key }}">
                                 {{ __('Date de naissance') }}
                             </label>
@@ -406,28 +367,8 @@
                             <span class="text-red-500 text-xs italic">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="civilite_enf_{{ $key }}">
-                                {{ __('Civilité') }}
-                            </label>
-                            <select wire:model="insureds.children.{{ $key }}.civilite" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Date de naissance" id="civilite_enf_{{ $key }}">
-                                <option value="M.">M.</option>
-                                <option value="Mme">Mme</option>
-                                <option value="Mlle">Mlle</option>
-                            </select>
-                            @error('civilite_enf_{{ $key }}')
-                            <span class="text-red-500 text-xs italic">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="code_securite_social_enf_{{ $key }}">
-                                {{ __('Code securité social') }}
-                            </label>
-                            <input wire:model="insureds.children.{{ $key }}.code_securite_social" type="text" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Code securité social" id="code_securite_social_enf_{{ $key }}" />
-                            @error('code_securite_social_enf_{{ $key }}')
-                            <span class="text-red-500 text-xs italic">{{ $message }}</span>
-                            @enderror
-                        </div>
+                       
+                       
 
 
 
