@@ -9,13 +9,13 @@ use Carbon\Carbon;
 class AppointementsService {
 
     public static function get(int $folder_id)
-    {
+    { Carbon::setLocale('fr');
         $folder = Folder::find($folder_id);
         return $folder->appointements()->where('date', '>', Carbon::now('Africa/Casablanca'))->orderBy('date', 'asc')->get();
     }
     
     public static function getAppointment($appointment_id)
-    {
+    {Carbon::setLocale('fr');
         $appointment = Appointement::find($appointment_id);
         return $appointment;
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Comment;
 
 use App\Services\CommentsService;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class Show extends Component
@@ -14,6 +15,7 @@ class Show extends Component
 
     public function render()
     {
+        Carbon::setLocale('fr');
         $this->comments = CommentsService::get($this->folderId);
         return view('comment.show');
     }

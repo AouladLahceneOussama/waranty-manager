@@ -7,12 +7,14 @@ use App\Models\Comment;
 use App\Models\Folder;
 use App\Models\Insured;
 use App\Models\Media;
+use Carbon\Carbon;
 
 class FoldersService
 {
 
     public static function getAll(array $options)
     {
+        Carbon::setLocale('fr');
         $folders = Folder::orderBy($options["orderBy"], $options["orderDirection"])->paginate($options["limit"]);
         return $folders;
     }
@@ -108,10 +110,12 @@ class FoldersService
 
             switch ($column) {
                 case "NOM_CLIENT":
-                    $folders = $folders->join('insureds as i3', function ($join){
-                        $join->on('f.id', '=', 'i3.folder_id');
-                    });
-                    $folders->where('i3.nom', 'LIKE', "%$value%")->orWhere('i3.prenom', 'LIKE', "%$value%");
+                    // $folders = $folders->join('insureds as i3', function ($join){
+                    //     $join->on('f.id', '=', 'i3.folder_id');
+                    // });
+                    // $folders->where('i3.nom', 'LIKE', "%$value%")->orWhere('i3.prenom', 'LIKE', "%$value%");*
+                    $folders = $folders->where("souscripteur", "LIKE", "%$value%");
+
                     break;
 
                 case "DATE_EFFET":

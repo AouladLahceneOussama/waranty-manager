@@ -90,7 +90,7 @@
 
                 <div class="w-full md:w-3/4">
                     <label for="nom_client" class="mb-1 block text-xs font-medium">
-                        Nom client
+                       Souscripteur
                     </label>
                     <input type="nom_client" wire:model.defer="filters.nom_client" id="nom_client" placeholder="nom de client" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" />
                     @error('filters.nom_client')
@@ -154,11 +154,11 @@
                             @include('components.sort-icons', ['name' => 'cotisation_ht'])
                         </th>
                         <th wire:click="sortBy('user_id')" class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 hover:opacity-100 cursor-pointer transition ease-in-out duration-300">
-                            Ajoute par
+                            Ajouté par
                             @include('components.sort-icons', ['name' => 'user_id'])
                         </th>
                         <th wire:click="sortBy('created_at')" class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 hover:opacity-100 cursor-pointer transition ease-in-out duration-300">
-                            Ajoute le
+                            modifié le
                             @include('components.sort-icons', ['name' => 'created_at'])
                         </th>
                         <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
@@ -198,7 +198,7 @@
                             <span wire:loading class="w-{{ $skeletonWidths[rand(0, count($skeletonWidths) - 1)] }} animate-pulse bg-gray-400 h-3 rounded-full"></span>
                         </td>
                         <td class="p-2 pl-6 text-left align-middle whitespace-nowrap">
-                            <span wire:loading.remove class="font-semibold leading-tight text-xs text-slate-700">{{ $folder->created_at->diffForHumans() }}</span>
+                            <span wire:loading.remove class="font-semibold leading-tight text-xs text-slate-700">{{ $folder->updated_at->diffForHumans() }}</span>
                             <span wire:loading class="w-{{ $skeletonWidths[rand(0, count($skeletonWidths) - 1)] }} animate-pulse bg-gray-400 h-3 rounded-full"></span>
                         </td>
                         <td class="p-2 pl-6 text-left align-middle whitespace-nowrap">

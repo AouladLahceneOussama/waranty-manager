@@ -34,6 +34,7 @@ class DashboardService
 
     public static function getCloserAppointment()
     {
+        Carbon::setLocale('fr');
         $appoitments = Appointement::where('date', '>', Carbon::now('Africa/Casablanca'))->orderBy('date', 'asc')->paginate(50);
         return $appoitments;
     }
