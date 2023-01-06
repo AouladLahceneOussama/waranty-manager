@@ -50,9 +50,9 @@
                                 Dossiers
                             </p>
                             <p class="text-lg font-semibold text-gray-700 dark:text-gray-200 text-s">
-                                {{ $statistics['folders']['COMPLET'] }} <span class="text-xs text-teal-600">
+                                {{ $statistics['folders']['COMPLET']?? }} <span class="text-xs text-teal-600">
                                     Complets</span> <br>
-                                {{ $statistics['folders']['INCOMPLET'] }} <span class="text-xs text-red-500"> Non
+                                {{ $statistics['folders']['INCOMPLET']?? }} <span class="text-xs text-red-500"> Non
                                     complets</span>
                             </p>
                         </div>
@@ -74,9 +74,9 @@
                             </p>
                             <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
 
-                                {{ $statistics['comments']['INFORMATIVE'] }} <span class="text-xs text-teal-600">
+                                {{ $statistics['comments']['INFORMATIVE']?? }} <span class="text-xs text-teal-600">
                                     Informatives</span> <br>
-                                {{ $statistics['comments']['URGENT'] }} <span class="text-xs text-red-500">
+                                {{ $statistics['comments']['URGENT']?? }} <span class="text-xs text-red-500">
                                     Urgents</span>
                             </p>
                         </div>
