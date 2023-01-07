@@ -22,13 +22,11 @@
         @enderror
     </label>
 
-
-
     @forelse($allMedias as $media)
     <div class="flex justify-between items-center py-4 px-4 rounded-md shadow-lg my-3">
         <div>
             <span class="text-xs font-bold">{{ $media->getClientOriginalName() }}</span>
-            <span class="text-xs text-gray-600"> ( {{ $media->getSize() / 1000 }} <strong>mb</strong> ) </span>
+            <span class="text-xs text-gray-600"> ( {{ round($media->getSize() / 100000, 2) }} <strong>mb</strong> ) </span>
         </div>
 
         <i wire:click.prevent="delete({{$loop->index}})" class="fa-solid fa-trash text-xs text-red-300 hover:text-red-500 duration-150 ease-in-out cursor-pointer"></i>
