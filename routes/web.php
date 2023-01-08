@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    route::get('/', [DashboardController::class, "index"])->name('dashboard');
+    route::get('/', [DashboardController::class, "index"]);
     Route::get('/dashboard', [DashboardController::class, "index"])->name('dashboard');
     Route::get('/clients', fn () => view('client.index'))->name('client.index');
 
