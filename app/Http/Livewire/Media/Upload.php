@@ -78,4 +78,5 @@ class Upload extends Component
         $this->allMedias = array_values($this->allMedias);
         $this->uploadedFiles = array_values($this->uploadedFiles);
     }
+    
 }
