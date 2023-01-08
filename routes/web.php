@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    if (Auth::check()) return view('/dashboard');
+    if (Auth::check()) return view('/dashboard', [DashboardController::class, "index"])->name('dashboard');
     return view('auth.login');
 });
 
