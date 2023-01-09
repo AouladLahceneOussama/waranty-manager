@@ -34,9 +34,9 @@ class InsuredsService
         return true;
     }
 
-    public static function createChilds(array $childs, int $folder_id)
+    public static function createChilds($data, int $folder_id)
     {
-        foreach ($childs as $data) {
+      //  foreach ($childs as $data) {
             $insured = new Insured();
             $insured->folder_id = $folder_id;
             $insured->nom = $data["nom"] ?? null;
@@ -46,7 +46,7 @@ class InsuredsService
             $insured->code_securite_social = $data["code_securite_social"] ?? null;
             $insured->type = "children";
             $insured->save();
-        }
+        //}
 
         return true;
     }
@@ -99,18 +99,11 @@ class InsuredsService
         return $insured;
     }
 
-    public static function updateOrCreateChilds(array $childs, int $folder_id)
+    public static function updateOrCreateChilds(array $child, int $folder_id)
     {
-      //  dd($childs);
-        $notExistingChilds = [];
 
-        foreach ($childs as $child) {
-     
             if (Insured::find($child["id"])) self::edit($child, $child["id"]);
-            else $notExistingChilds[] = $child;
-        }
-
-        self::createChilds($notExistingChilds, $folder_id);
+            else self::createChilds($child, $folder_id);
     }
 
     public static function delete($child_id)
