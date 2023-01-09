@@ -1,0 +1,31 @@
+name: prod deploy
+
+on:
+  push:
+    branches: [ main ]
+
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: pull the changes
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.KEY }}
+          script: |
+            cd /var/www/b2sw/
+            git pull origin main
+            composer install --optimize-autoloader --no-dev
+            php artisan migrate
+            php artisan optimize
+
+
+
+
+
+

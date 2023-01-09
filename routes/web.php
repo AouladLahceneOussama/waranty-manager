@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     if (Auth::check()) return view('/dashboard', [DashboardController::class, "index"])->name('dashboard');
+//     return view('auth.login');
+// });
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
+    route::get('/', [DashboardController::class, "index"]);
     Route::get('/dashboard', [DashboardController::class, "index"])->name('dashboard');
     Route::get('/clients', fn () => view('client.index'))->name('client.index');
 
