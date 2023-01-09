@@ -9,6 +9,7 @@
             </div>
 
             <div>
+                <a href="/storage/{{base64_decode($media->identifier)}}" target="_blank" ><i class="fa-solid fa-eye text-teal-700 hover:text-teal-600 ml-1 text-xs duration-150 ease-in-out cursor-pointer"></i></a>
                 <a href="/storage/{{base64_decode($media->identifier)}}" download><i class="fa-solid fa-download text-teal-500 hover:text-teal-600 ml-1 text-xs duration-150 ease-in-out cursor-pointer"></i></a>
                 <i wire:click.prevent="delete({{ $media->id }})" class="fa-solid fa-trash text-red-500 hover:text-red-600 ml-1 text-xs duration-150 ease-in-out cursor-pointer"></i>
             </div>
