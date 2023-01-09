@@ -27,7 +27,6 @@ class Form extends Component
         "folder.compagnie" => "required|string",
         "folder.souscripteur" => "required|string",
         "folder.cotisation_ht" => "required|string",
-        "folder.cotisation_ttc" => "required|string",
         "folder.date_effet" => "required|date",
         "folder.numero_adheration" => "required|string",
         "folder.status" => "required|string",
