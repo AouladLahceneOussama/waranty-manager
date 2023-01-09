@@ -3,7 +3,7 @@
 
         <div class="w-full mb-2">
             <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="nom">
-                {{ __('Nom') }}
+                {{ __('Description') }}
             </label>
             <input wire:model="name" type="text" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Nom de l'assuré" id="nom" />
             @error('name')
