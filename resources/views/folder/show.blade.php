@@ -149,7 +149,7 @@
                             Date effet
                             @include('components.sort-icons', ['name' => 'date_effet'])
                         </th>
-                        <th wi-re:click="sortBy('cotisation_ht')" class="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 hover:opacity-100 cursor-pointer transition ease-in-out duration-300">
+                        <th wire:click="sortBy('cotisation_ht')" class="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 hover:opacity-100 cursor-pointer transition ease-in-out duration-300">
                             Cotisation
                             @include('components.sort-icons', ['name' => 'cotisation_ht'])
                         </th>
@@ -214,7 +214,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="8" class="text-left py-6">
+                        <td colspan="8" class="text-center py-6">
                             <span class="text-gray-400">Il y a pas des dossiers pour le moment, commencez par la
                                 creation d'un nouveua dossier.</span>
                         </td>

@@ -15,9 +15,16 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
+                    @can('view-users')
+                    <x-jet-nav-link href="{{ route('user.index') }}" :active="request()->routeIs('user.index')">
+                        {{ __('Utilisateurs') }}
+                    @endcan
+                    </x-jet-nav-link>
+                    @can('view-folders')
                     <x-jet-nav-link href="{{ route('folder.index') }}" :active="request()->routeIs('folder.index')">
                         {{ __('Dossiers') }}
                     </x-jet-nav-link>
+                    @endcan
                 </div>
             </div>
 
@@ -82,7 +89,7 @@
                                 </button>
                             @else
                                 <span class="inline-flex rounded-md">
-                                    <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
+                                    <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500  hover:text-gray-700 focus:outline-none transition">
                                         {{ Auth::user()->name }}
 
                                         <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -143,9 +150,18 @@
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
+
+            @can('view-users')
+            <x-jet-responsive-nav-link href="{{ route('user.index') }}" :active="request()->routeIs('user.index')">
+                {{ __('Utilisateurs') }}
+            </x-jet-responsive-nav-link>
+            @endcan
+
+            @can('view-folders')
             <x-jet-responsive-nav-link href="{{ route('folder.index') }}" :active="request()->routeIs('folder.index')">
                 {{ __('Dossiers') }}
             </x-jet-responsive-nav-link>
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->
@@ -181,7 +197,7 @@
 
                     <x-jet-responsive-nav-link href="{{ route('logout') }}"
                                    @click.prevent="$root.submit();">
-                        {{ __('Log Out') }}
+                        {{ __('Se déconnecter') }}
                     </x-jet-responsive-nav-link>
                 </form>
 

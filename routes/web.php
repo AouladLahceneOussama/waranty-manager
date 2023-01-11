@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FolderController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,14 +25,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     route::get('/', [DashboardController::class, "index"]);
     Route::get('/dashboard', [DashboardController::class, "index"])->name('dashboard');
-    Route::get('/clients', fn () => view('client.index'))->name('client.index');
+
+    // Users routes
+    Route::get('/users', [UserController::class, 'index'])->name('user.index');
+    Route::get('/users/create', [UserController::class, 'create'])->name('user.create');
+    Route::get('/users/edit/{id}', [UserController::class, 'edit']);
 
     // Folders routes
-    Route::get('/folders', fn () => view('folder.index'))->name('folder.index');
-    Route::get('/folders/create', fn () => view('folder.create'))->name('folder.create');
-    Route::get('/folders/edit/{id}', fn ($folderId) => view('folder.edit', ['folderId' => $folderId]));
-    // Route::get('/folders/', function($id) {  
-    //     return  view('folder.edit',["id"=>$id]);
-    //  });
-
+    Route::get('/folders', [FolderController::class, 'index'])->name('folder.index');
+    Route::get('/folders/create', [FolderController::class, 'create'])->name('folder.create');
+    Route::get('/folders/edit/{id}', [FolderController::class, 'edit']);
 });
