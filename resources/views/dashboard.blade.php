@@ -76,7 +76,7 @@
 
                                 {{ $statistics['comments']['INFORMATIVE']?? 0}} <span class="text-xs text-teal-600">
                                     Informatives</span> <br>
-                                {{ $statistics['comments']['URGENT']?? 0}} <span class="text-xs text-red-500">
+                                {{ $statistics['comments']['URGENT']?? 0 }} <span class="text-xs text-red-500">
                                     Urgents</span>
                             </p>
                         </div>

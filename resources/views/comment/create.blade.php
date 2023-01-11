@@ -51,6 +51,7 @@
                 {{ __('Status') }}
             </label>
             <select wire:model="status" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Status" id="status">
+                <option value="">Choisir...</option>
                 <option value="URGENT">Urgent</option>
                 <option value="EN_COURS">En cours</option>
                 <option value="COMPLET">Complet</option>

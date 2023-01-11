@@ -108,10 +108,13 @@ class FormEdit extends Component
     }
     public function removeChild($key)
     {
-        $this->replaceKeys($key);
+        
         InsuredsService::delete($this->insureds['children'][$key]["id"]);
+       
         unset($this->insureds['children'][$key]);
         $this->insureds['children'] = array_values($this->insureds['children']);
+       
+        $this->replaceKeys($key);
         $this->childTotal--;
     }
 
@@ -152,7 +155,7 @@ class FormEdit extends Component
 
             case 'editChild' . $key:
                 //dd($this->insureds["children"][$key]);
-                InsuredsService::updateOrCreateChilds($this->insureds["children"], $this->folderId);
+                InsuredsService::updateOrCreateChilds($this->insureds["children"][$key], $this->folderId);
                 $this->sendNotification("Enfant", "cree ou modifie");
                 break;
 
