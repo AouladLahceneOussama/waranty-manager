@@ -93,6 +93,7 @@
                         </td>
                         <td class="p-2 pl-6 text-center align-middle whitespace-nowrap">
                             @if($user->createdBy)
+                            @can('manage-users')
                             <span wire:loading.remove>
                                 <a href="/users/edit/{{ $user->id }}"><i class="fa-solid fa-pen text-teal-600 p-1 cursor-pointer text-xs"></i>
                                 </a><i wire:click.prevent="confirmModal(true, {{ $user->id }})" class="fa-solid fa-trash text-red-500 p-1 cursor-pointer text-xs"></i>
@@ -101,6 +102,7 @@
                                 <i class="animate-pulse fa-solid fa-pen text-gray-400 p-1 cursor-pointer text-xs"></i>
                                 <i class="animate-pulse fa-solid fa-trash text-gray-400 p-1 cursor-pointer text-xs"></i>
                             </span>
+                            @endcan
                             @else
                             <span wire:loading.remove>
                                 <i class="fa-solid fa-ban text-gray-600 cursor-pointer text-xs"></i>
