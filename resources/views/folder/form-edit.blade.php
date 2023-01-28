@@ -6,7 +6,7 @@
 
             <div class="w-full mb-3">
                 <span class="text-teal-600 text-xl ">{{ __('Informations générales') }}
-                    @if (!in_array('editGeneralInfo', $activatedSection))
+                    @if (!in_array('editGeneralInfo', $activatedSection) && (Gate::check('admin') || Gate::check('edit')))
                     {{-- in_array --}}
                     <i wire:click.prevent="addToActivatedSection('editGeneralInfo')" class="fa-solid fa-pen hover:text-teal-700 p-1 cursor-pointer text-xl"></i>
                     @endif
@@ -104,7 +104,7 @@
                 </div>
             </div>
 
-            @if (in_array('editGeneralInfo', $activatedSection))
+            @if (in_array('editGeneralInfo', $activatedSection) && (Gate::check('admin') || Gate::check('edit')))
             <button type="button" wire:click.prevent="save('editGeneralInfo')" class="mb-2 px-8 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-700 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
                 {{ __('Enregistrer') }}
             </button>
@@ -122,7 +122,7 @@
             <div class="w-full mb-3">
                 <div class="flex justify-between items-center">
                     <span class="text-teal-600 text-xl ">{{ __('Informations de l\'assuré principal') }}
-                        @if (!in_array('editPrimaryAsured', $activatedSection))
+                        @if (!in_array('editPrimaryAsured', $activatedSection) && (Gate::check('admin') || Gate::check('edit')))
                         {{-- in_array --}}
                         <i wire:click.prevent="addToActivatedSection('editPrimaryAsured')" class="fa-solid fa-pen hover:text-teal-700 p-1 cursor-pointer text-xl"></i>
                         @endif
@@ -260,7 +260,7 @@
                 </div>
             </div>
 
-            @if (in_array('editPrimaryAsured', $activatedSection))
+            @if (in_array('editPrimaryAsured', $activatedSection) && (Gate::check('admin') || Gate::check('edit')))
             <button wire:click.prevent="save('editPrimaryAsured')" class="mb-2 px-8 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-700 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
                 {{ __('Enregistrer') }}
             </button>
@@ -275,7 +275,7 @@
             <div class="w-full mb-3">
                 <div class="flex justify-between items-center">
                     <span class="text-teal-600 text-xl ">{{ __('Informations de l\'assuré secondaire') }}
-                        @if (!in_array('editSecondaryAsured', $activatedSection))
+                        @if (!in_array('editSecondaryAsured', $activatedSection) && (Gate::check('admin') || Gate::check('edit')))
                         {{-- in_array --}}
                         <i wire:click.prevent="addToActivatedSection('editSecondaryAsured')" class="fa-solid fa-pen hover:text-teal-700 p-1 cursor-pointer text-xl"></i>
                         @endif
@@ -333,14 +333,9 @@
                         <span class="text-red-500 text-xs italic">{{ $message }}</span>
                         @enderror
                     </div>
-
-
-
-
-
                 </div>
             </div>
-            @if (in_array('editSecondaryAsured', $activatedSection))
+            @if (in_array('editSecondaryAsured', $activatedSection) && (Gate::check('admin') || Gate::check('edit')))
             <button wire:click.prevent="save('editSecondaryAsured')" class="mb-2 px-8 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-700 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
                 {{ __('Enregistrer') }}
             </button>
@@ -362,97 +357,110 @@
             </div>
 
             @if (isset($insureds['children']))
-            @foreach ($insureds['children'] as $key => $value)
-            <div wire:key="{{ $key }}" class="w-full bg-white bg-opacity-70 p-2 my-2 rounded">
-                <div class="w-full mb-3">
-                    <div class="flex justify-between items-center">
-                        <span class="text-gray-400 text-xs ">{{ __('Enfant') . ' N°' . $key + 1 }}
-                            @if (!in_array('editChild' . $key, $activatedSection))
-                            {{-- in_array --}}
-                            <i wire:click.prevent="addToActivatedSection('editChild{{ $key }}')" class="fa-solid fa-pen hover:text-teal-700 p-1 cursor-pointer text-xs"></i>
-                            @endif
-                        </span>
-                        <button type="button" wire:click.prevent="removeChild({{ $key }})" class="mb-2 px-8 py-2 bg-red-500 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-600 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
-                            {{ __('Supprimer l\'enfant') }}
-                        </button>
+                @forelse($insureds['children'] as $key => $value)
+                <div wire:key="{{ $key }}" class="w-full bg-white bg-opacity-70 p-2 my-2 rounded">
+                    <div class="w-full mb-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400 text-xs ">{{ __('Enfant') . ' N°' . $key + 1 }}
+                                @if (!in_array('editChild' . $key, $activatedSection) && (Gate::check('admin') || Gate::check('edit')))
+                                {{-- in_array --}}
+                                <i wire:click.prevent="addToActivatedSection('editChild{{ $key }}')" class="fa-solid fa-pen hover:text-teal-700 p-1 cursor-pointer text-xs"></i>
+                                @endif
+                            </span>
+                            <button type="button" wire:click.prevent="removeChild({{ $key }})" class="mb-2 px-8 py-2 bg-red-500 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-600 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
+                                {{ __('Supprimer l\'enfant') }}
+                            </button>
+                        </div>
+                        <div class="bg-gray-200 w-full h-px"></div>
                     </div>
-                    <div class="bg-gray-200 w-full h-px"></div>
+                    <div class="w-full">
+
+                        <div class="flex flex-wrap -mx-3 mb-4">
+
+                            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="nom_enf_{{ $key }}">
+                                    {{ __('Nom de famille') }}
+                                </label>
+                                <input wire:model="insureds.children.{{ $key }}.nom" type="text" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Nom de l'assuré" id="nom_enf_{{ $key }}" {{ !in_array('editChild' . $key, $activatedSection) ? 'disabled' : '' }} />
+                                @error('nom_enf_{{ $key }}')
+                                <span class="text-red-500 text-xs italic">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="prenom_enf_{{ $key }}">
+                                    {{ __('Prénom') }}
+                                </label>
+                                <input wire:model="insureds.children.{{ $key }}.prenom" type="text" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Prénom de l'assuré" id="prenom_enf_{{ $key }}" {{ !in_array('editChild' . $key, $activatedSection) ? 'disabled' : '' }} />
+                                @error('prenom_enf_{{ $key }}')
+                                <span class="text-red-500 text-xs italic">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                        </div>
+
+                        <div class="flex flex-wrap -mx-3 mb-4">
+                            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="date_naissance__enf_{{ $key }}">
+                                    {{ __('Date de naissance') }}
+                                </label>
+                                <input wire:model="insureds.children.{{ $key }}.date_naissance" type="date" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Date de naissance" id="date_naissance__enf_{{ $key }}" {{ !in_array('editChild' . $key, $activatedSection) ? 'disabled' : '' }} />
+                                @error('date_naissance__enf_{{ $key }}')
+                                <span class="text-red-500 text-xs italic">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="civilite_enf_{{ $key }}">
+                                    {{ __('Civilité') }}
+                                </label>
+                                <select wire:model="insureds.children.{{ $key }}.civilite" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Date de naissance" id="civilite_enf_{{ $key }} {{ !in_array('editChild' . $key, $activatedSection) ? 'disabled' : '' }}">
+                                    <Option>M.</Option>
+                                    <Option>Mme</Option>
+                                    <Option>Mlle</Option>
+                                </select>
+                                @error('civilite_enf_{{ $key }}')
+                                <span class="text-red-500 text-xs italic">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+
+                    @if (in_array('editChild' . $key, $activatedSection) && (Gate::check('admin') || Gate::check('edit')))
+                    <button wire:click.prevent="save('editChild{{ $key }}')" class="mb-2 px-8 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-700 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
+                        {{ __('Enregistrer') }}
+                    </button>
+                    <button type="button" wire:click.prevent="cancel('editChild{{ $key }}')" class="mb-2 px-8 py-2 bg-red-500 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-600 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
+                        {{ __('Annuler') }}
+                    </button>
+                    @endif
+
                 </div>
-                <div class="w-full">
-
-                    <div class="flex flex-wrap -mx-3 mb-4">
-
-                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                            <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="nom_enf_{{ $key }}">
-                                {{ __('Nom de famille') }}
-                            </label>
-                            <input wire:model="insureds.children.{{ $key }}.nom" type="text" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Nom de l'assuré" id="nom_enf_{{ $key }}" {{ !in_array('editChild' . $key, $activatedSection) ? 'disabled' : '' }} />
-                            @error('nom_enf_{{ $key }}')
-                            <span class="text-red-500 text-xs italic">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                            <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="prenom_enf_{{ $key }}">
-                                {{ __('Prénom') }}
-                            </label>
-                            <input wire:model="insureds.children.{{ $key }}.prenom" type="text" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Prénom de l'assuré" id="prenom_enf_{{ $key }}" {{ !in_array('editChild' . $key, $activatedSection) ? 'disabled' : '' }} />
-                            @error('prenom_enf_{{ $key }}')
-                            <span class="text-red-500 text-xs italic">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                    </div>
-
-                    <div class="flex flex-wrap -mx-3 mb-4">
-                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                            <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="date_naissance__enf_{{ $key }}">
-                                {{ __('Date de naissance') }}
-                            </label>
-                            <input wire:model="insureds.children.{{ $key }}.date_naissance" type="date" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Date de naissance" id="date_naissance__enf_{{ $key }}" {{ !in_array('editChild' . $key, $activatedSection) ? 'disabled' : '' }} />
-                            @error('date_naissance__enf_{{ $key }}')
-                            <span class="text-red-500 text-xs italic">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                            <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="civilite_enf_{{ $key }}">
-                                {{ __('Civilité') }}
-                            </label>
-                            <select wire:model="insureds.children.{{ $key }}.civilite" class="text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-gray-500 focus:outline-none focus:transition-shadow" placeholder="Date de naissance" id="civilite_enf_{{ $key }} {{ !in_array('editChild' . $key, $activatedSection) ? 'disabled' : '' }}">
-                                <Option>M.</Option>
-                                <Option>Mme</Option>
-                                <Option>Mlle</Option>
-                            </select>
-                            @error('civilite_enf_{{ $key }}')
-                            <span class="text-red-500 text-xs italic">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-
-
-
-                    </div>
+                @empty
+                <div class="w-full text-center">
+                    <p class="text-gray-700 text-xs italic">{{ __('Ce dossier ne contient pas des enfants') }}</p>
                 </div>
-
-                @if (in_array('editChild' . $key, $activatedSection))
-                <button wire:click.prevent="save('editChild{{ $key }}')" class="mb-2 px-8 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-700 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
-                    {{ __('Enregistrer') }}
-                </button>
-                <button type="button" wire:click.prevent="cancel('editChild{{ $key }}')" class="mb-2 px-8 py-2 bg-red-500 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-600 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
-                    {{ __('Annuler') }}
-                </button>
-                @endif
-
+                @endforelse
+            @else
+            <div class="w-full text-center">
+                <p class="text-gray-500 text-xs italic">{{ __('Ce dossier ne contient pas des enfants') }}</p>
             </div>
-            @endforeach
             @endif
+
+            @if(Gate::check('admin') || Gate::check('edit'))
             <button type="button" wire:click.prevent="addChild" class="mb-2 px-4 py-2 bg-teal-600 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-teal-600 focus:outline-none focus:border-gray-900 disabled:opacity-25 transition">
                 {{ __('Ajouter un enfant') }}
             </button>
+            @endif
         </div>
 
         {{-- Documments --}}
+        @if(Gate::check('admin') || Gate::check('edit'))
         <livewire:media.upload :folderId="$folderId" :updating="true" />
+        @endif
         <livewire:media.show :folderId="$folderId" />
 
     </form>

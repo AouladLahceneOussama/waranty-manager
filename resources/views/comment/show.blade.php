@@ -41,10 +41,12 @@
                     @endif
                 </div>
 
+                @if(Gate::check('admin') || Gate::check('edit'))
                 <div>
                     <i wire:click.prevent="edit({{ $comment->id }})" class="fa-solid fa-pen text-green-500 hover:text-green-600 ml-1 text-xs duration-150 ease-in-out cursor-pointer"></i>
                     <i wire:click.prevent="delete({{ $comment->id }})" class="fa-solid fa-trash text-red-500 hover:text-red-600 ml-1 text-xs duration-150 ease-in-out cursor-pointer"></i>
                 </div>
+                @endif
             </div>
             <div class="my-2 break-words">{!! $comment->comment !!}</div>
         </div>

@@ -10,21 +10,15 @@ class Form extends Component
     public $rules = [
         "name" => "required|string|min:5|max:100",
         "email" => "required|email|unique:users,email",
-        "role" => "required|string",
-        "permissions" => "required|string"
+        "role" => "required|integer",
     ];
 
     public $static_permissions = [
-        "*" => "Tout",
-        "view_user" => "Consulter Utilisateur",
-        "create_user" => "Créé Utilisateur",
-        "edit_user" => "Modifier Utilisateur",
-        "delete_user" => "Supprimer Utilisateur",
-        "view_folder" => "Consulter Dossier",
-        "create_folder" => "Créé Dossier",
-        "edit_folder" => "Modifier Dossier",
-        "delete_folder" => "Supprimer Dossier",
+        "1" => "ADMIN",
+        "2" => "VIEWER",
+        "3" => "EDITOR",
     ];
+
     public $userId;
     public $action = "Ajouter";
     public $name;
@@ -59,8 +53,7 @@ class Form extends Component
             "name" => $this->name,
             "email" => $this->email,
             "password" => $this->password,
-            "role" => $this->role,
-            "permissions" => $this->permissions,
+            "role_id" => $this->role,
         ]);
 
         $this->emit('newResponse', [
@@ -73,7 +66,7 @@ class Form extends Component
             'msg' => "Utilisateur bien ajouter",
             'data' => ""
         ]);
-        sleep(2);
+
         return redirect('users');
     }
 
@@ -86,8 +79,7 @@ class Form extends Component
             "name" => $this->name,
             "email" => $this->email,
             "password" => $this->password,
-            "role" => $this->role,
-            "permissions" => $this->permissions,
+            "role_id" => $this->role,
         ], $this->userId);
 
         $this->emit('newResponse', [
@@ -100,7 +92,7 @@ class Form extends Component
             'msg' => "Utilisateur bien Modifier",
             'data' => ""
         ]);
-        sleep(2);
+
         return redirect('users');
     }
 }

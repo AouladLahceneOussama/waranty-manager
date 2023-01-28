@@ -15,16 +15,16 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
-                    @can('view-users')
+                    @can('admin')
                     <x-jet-nav-link href="{{ route('user.index') }}" :active="request()->routeIs('user.index')">
                         {{ __('Utilisateurs') }}
                     @endcan
                     </x-jet-nav-link>
-                    @can('view-folders')
+
                     <x-jet-nav-link href="{{ route('folder.index') }}" :active="request()->routeIs('folder.index')">
                         {{ __('Dossiers') }}
                     </x-jet-nav-link>
-                    @endcan
+
                 </div>
             </div>
 
@@ -151,17 +151,15 @@
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
 
-            @can('view-users')
+            @can('admin')
             <x-jet-responsive-nav-link href="{{ route('user.index') }}" :active="request()->routeIs('user.index')">
                 {{ __('Utilisateurs') }}
             </x-jet-responsive-nav-link>
             @endcan
 
-            @can('view-folders')
             <x-jet-responsive-nav-link href="{{ route('folder.index') }}" :active="request()->routeIs('folder.index')">
                 {{ __('Dossiers') }}
             </x-jet-responsive-nav-link>
-            @endcan
         </div>
 
         <!-- Responsive Settings Options -->

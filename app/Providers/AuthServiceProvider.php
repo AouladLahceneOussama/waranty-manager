@@ -4,6 +4,7 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 
+use App\Models\Role;
 use App\Models\User;
 use App\Policies\FolderPolicy;
 use App\Policies\UserPolicy;
@@ -33,26 +34,17 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        // users gates
-        Gate::define('view-users', function (User $user) {
-            $allowedToView = ["*", "view_user", "create_user", "edit_user", "delete_user"];
-            return in_array($user->permissions, $allowedToView);
+        Gate::define('view', function (User $user) {
+            return $user->role_id == Role::VIEWER;
         });
 
-        Gate::define('manage-users', function (User $user, $user_id = null) {
-            $allowedToManage = ["create_user", "edit_user", "delete_user"];
-            return (str_contains($user->permissions, "*")) || ($user_id && $user->id == $user_id && in_array($user->permissions, $allowedToManage));
+        Gate::define('edit', function (User $user) {
+            return $user->role_id == Role::EDITOR;
         });
 
-        // folders gates
-        Gate::define('view-folders', function (User $user) {
-            $allowedToView = ["*", "view_folder", "create_folder", "edit_folder", "delete_folder"];
-            return in_array($user->permissions, $allowedToView);
+        Gate::define('admin', function (User $user) {
+            return $user->role_id == Role::ADMIN;
         });
 
-        Gate::define('manage-folders', function (User $user, $folder_user_id = null) {
-            $allowedToManage = ["*", "create_folder", "edit_folder", "delete_folder"];
-            return (str_contains($user->permissions, "*")) || ($folder_user_id && $user->id == $folder_user_id && in_array($user->permissions, $allowedToManage));
-        });
     }
 }

@@ -9,13 +9,13 @@ class UserController
 {
     public function index()
     {
-        if(!Gate::authorize('view-users')) abort(403);
+        if(!Gate::check('admin')) abort(403);
         return view("user.index");
     }
 
     public function create()
     {
-        if(!Gate::authorize('manage-users')) abort(403);
+        if(!Gate::check('admin')) abort(403);
         return view("user.create");
     }
 
@@ -24,7 +24,7 @@ class UserController
         $user = User::find($userId);
         if(!$user) abort(404);
 
-        if(!Gate::authorize('manage-users', $userId)) abort(403);
+        if(!Gate::check('admin')) abort(403);
 
         return view("user.edit", compact('userId'));
     }

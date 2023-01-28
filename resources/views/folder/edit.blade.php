@@ -11,11 +11,15 @@
             <div class="flex justify-between items-start flex-wrap bg-teal-50 my-2 py-4 rounded-md">
                 <div class="w-full md:w-1/2">
                     <livewire:comment.show :folderId="$folderId" />
+                    @if(Gate::check('admin') || Gate::check('edit'))
                     <livewire:comment.create :folderId="$folderId" />
+                    @endif
                 </div>
                 <div class="w-full md:w-1/2">
                     <livewire:appointment.show :folderId="$folderId" />
+                    @if(Gate::check('admin') || Gate::check('edit'))
                     <livewire:appointment.create :folderId="$folderId" />
+                    @endif
                 </div>
             </div>
             

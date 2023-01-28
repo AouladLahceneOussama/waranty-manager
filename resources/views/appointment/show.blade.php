@@ -12,8 +12,10 @@
             <span class="text-xs text-green-600">{{ $appointment->name }}</span>
             <div>
                 <span class="text-xs font-semibold mr-4 ">{{ $appointment->date->diffForHumans() }}</span>
+                @if(Gate::check('admin') || Gate::check('edit'))
                 <i wire:click.prevent="edit({{ $appointment->id }})" class="fa-solid fa-pen text-green-500 hover:text-green-600 ml-1 text-xs duration-150 ease-in-out cursor-pointer"></i>
                 <i wire:click.prevent="delete({{ $appointment->id }})" class="fa-solid fa-trash text-red-500 hover:text-red-600 ml-1 text-xs duration-150 ease-in-out cursor-pointer"></i>
+                @endif
             </div>
         </div>
         @empty

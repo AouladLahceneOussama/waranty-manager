@@ -29,8 +29,7 @@ class UsersService
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->password = Hash::make($data['password']); 
-        $user->role = $data['role'];
-        $user->permissions = str_contains($data['permissions'], "*") ? "*" : $data['permissions'];
+        $user->role_id = $data['role_id'];
         $user->save();
 
         return $user;
@@ -44,8 +43,7 @@ class UsersService
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->password = isset($data['password']) ? Hash::make($data['password']) : $user->password; 
-        $user->role = $data['role'];
-        $user->permissions = str_contains($data['permissions'], "*") ? "*" : $data['permissions'];
+        $user->role_id = $data['role_id'];
         $user->save();
     }
 

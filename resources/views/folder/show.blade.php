@@ -201,13 +201,13 @@
                             <span wire:loading.remove class="font-semibold leading-tight text-xs text-slate-700">{{ $folder->updated_at->diffForHumans() }}</span>
                             <span wire:loading class="w-{{ $skeletonWidths[rand(0, count($skeletonWidths) - 1)] }} animate-pulse bg-gray-400 h-3 rounded-full"></span>
                         </td>
-                        <td class="p-2 pl-6 text-left align-middle whitespace-nowrap">
-                            @can('manage-folders')
+                        <td class="p-2 text-center align-middle whitespace-nowrap">
+                            <a href="/folders/edit/{{ $folder->id }}"><i class="fa-solid fa-pen text-teal-600 p-1 cursor-pointer text-xs"></i></a>
+                            @if(Gate::check('admin') || Gate::check('edit'))
                             <span wire:loading.remove>
-                                <a href="/folders/edit/{{ $folder->id }}"><i class="fa-solid fa-pen text-teal-600 p-1 cursor-pointer text-xs"></i>
-                                </a><i wire:click.prevent="delete({{ $folder->id }})" class="fa-solid fa-trash text-red-500 p-1 cursor-pointer text-xs"></i>
+                                <i wire:click.prevent="delete({{ $folder->id }})" class="fa-solid fa-trash text-red-500 p-1 cursor-pointer text-xs"></i>
                             </span>
-                            @endcan
+                            @endif
                             <span wire:loading>
                                 <i class="animate-pulse fa-solid fa-pen text-gray-400 p-1 cursor-pointer text-xs"></i>
                                 <i class="animate-pulse fa-solid fa-trash text-gray-400 p-1 cursor-pointer text-xs"></i>

@@ -38,10 +38,6 @@
                             Role
                             @include('components.sort-icons', ['name' => 'role'])
                         </th>
-                        <th wire:click="sortBy('permissions')" class="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 hover:opacity-100 cursor-pointer transition ease-in-out duration-300">
-                            Permisions
-                            @include('components.sort-icons', ['name' => 'permissions'])
-                        </th>
                         <th class="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 hover:opacity-100 cursor-pointer transition ease-in-out duration-300">
                             Créé Par
                         </th>
@@ -71,16 +67,8 @@
                             <span wire:loading class="w-{{ $skeletonWidths[rand(0, count($skeletonWidths) - 1)] }} animate-pulse bg-gray-400 h-3 rounded-full"></span>
                         </td>
                         <td class="p-2 align-middle whitespace-nowrap">
-                            <span wire:loading.remove class="font-semibold leading-tight text-xs text-slate-700">{{ $user->role }}</span>
-                            <span wire:loading class="w-{{ $skeletonWidths[rand(0, count($skeletonWidths) - 1)] }} animate-pulse bg-gray-400 h-3 rounded-full"></span>
-                        </td>
-                        <td class="p-2 text-left align-middle whitespace-nowrap">
-                            <span wire:loading.remove class="font-semibold leading-tight text-xs text-slate-700">
-                                @foreach(explode(",", $user->permissions) as $p)
-                                <span class="px-2 py-1 mx-1 text-xs text-white bg-teal-400 rounded-md">{{ $p }}</span>
-                                @endforeach
-
-                            </span>
+                            <span wire:loading.remove class="font-semibold leading-tight text-xs text-slate-700">{{ $user->role->name }}</span><br>
+                            <span wire:loading.remove class="font-semibold leading-tight text-xs text-slate-500">{{ $user->role->description }}</span>
                             <span wire:loading class="w-{{ $skeletonWidths[rand(0, count($skeletonWidths) - 1)] }} animate-pulse bg-gray-400 h-3 rounded-full"></span>
                         </td>
                         <td class="p-2 text-left align-middle whitespace-nowrap">
@@ -93,22 +81,20 @@
                         </td>
                         <td class="p-2 pl-6 text-center align-middle whitespace-nowrap">
                             @if($user->createdBy)
-                            @can('manage-users')
                             <span wire:loading.remove>
                                 <a href="/users/edit/{{ $user->id }}"><i class="fa-solid fa-pen text-teal-600 p-1 cursor-pointer text-xs"></i>
                                 </a><i wire:click.prevent="confirmModal(true, {{ $user->id }})" class="fa-solid fa-trash text-red-500 p-1 cursor-pointer text-xs"></i>
                             </span>
                             <span wire:loading>
-                                <i class="animate-pulse fa-solid fa-pen text-gray-400 p-1 cursor-pointer text-xs"></i>
-                                <i class="animate-pulse fa-solid fa-trash text-gray-400 p-1 cursor-pointer text-xs"></i>
+                                <i class="animate-pulse fa-solid fa-pen text-gray-400 p-1 text-xs"></i>
+                                <i class="animate-pulse fa-solid fa-trash text-gray-400 p-1 text-xs"></i>
                             </span>
-                            @endcan
                             @else
                             <span wire:loading.remove>
-                                <i class="fa-solid fa-ban text-gray-600 cursor-pointer text-xs"></i>
+                                <i class="fa-solid fa-ban text-gray-600 text-xs"></i>
                             </span>
                             <span wire:loading>
-                                <i class="animate-pulse fa-solid fa-ban text-gray-600 cursor-pointer text-xs"></i>
+                                <i class="animate-pulse fa-solid fa-ban text-gray-600 text-xs"></i>
                             </span>
                             @endif
 
