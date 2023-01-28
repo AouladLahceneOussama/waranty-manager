@@ -21,7 +21,6 @@ jobs:
             cd /var/www/b2sw/
             git pull origin main
             composer install --optimize-autoloader --no-dev
-            php artisan migrate
             php artisan optimize
 
 

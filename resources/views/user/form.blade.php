@@ -25,7 +25,7 @@
 
     <div class="flex flex-wrap -mx-3 mb-4">
 
-        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <div class="w-full px-3 mb-6 md:mb-0">
             <label class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-1" for="role">
                 {{ __('Role') }}
             </label>
