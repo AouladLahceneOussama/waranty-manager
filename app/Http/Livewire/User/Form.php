@@ -10,7 +10,7 @@ class Form extends Component
     public $rules = [
         "name" => "required|string|min:5|max:100",
         "email" => "required|email|unique:users,email",
-        "role" => "required|integer",
+        "role" => "required|integer|in:1,2,3",
     ];
 
     public $static_permissions = [
