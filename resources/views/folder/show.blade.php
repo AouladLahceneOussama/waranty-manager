@@ -202,8 +202,13 @@
                             <span wire:loading class="w-{{ $skeletonWidths[rand(0, count($skeletonWidths) - 1)] }} animate-pulse bg-gray-400 h-3 rounded-full"></span>
                         </td>
                         <td class="p-2 text-center align-middle whitespace-nowrap">
-                            <a href="/folders/edit/{{ $folder->id }}"><i class="fa-solid fa-pen text-teal-600 p-1 cursor-pointer text-xs"></i></a>
+                            @if(Gate::check('view'))
+                            <a href="/folders/edit/{{ $folder->id }}"><i class="fa-solid fa-eye text-teal-600 p-1 cursor-pointer text-xs"></i></a>
+                            @endif
+
                             @if(Gate::check('admin') || Gate::check('edit'))
+                            <a href="/folders/edit/{{ $folder->id }}"><i class="fa-solid fa-pen text-teal-600 p-1 cursor-pointer text-xs"></i></a>
+
                             <span wire:loading.remove>
                                 <i wire:click.prevent="delete({{ $folder->id }})" class="fa-solid fa-trash text-red-500 p-1 cursor-pointer text-xs"></i>
                             </span>
