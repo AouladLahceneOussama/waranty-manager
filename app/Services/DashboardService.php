@@ -16,7 +16,7 @@ class DashboardService
         $folders = Folder::groupBy("status")->selectRaw("status, count(*) as count")->pluck("count", "status");
         $comments = Comment::groupBy("status")->selectRaw("status, count(*) as count")->pluck("count", "status");
         $appointments = Appointement::where('date', '>', Carbon::now('Africa/Casablanca'))->count();
-        $users = User::count();
+        $users = User::groupBy("roles.name")->selectRaw("count(*) as count, roles.name")->join("roles", "roles.id",  "=" ,"users.role_id")->pluck("count", "roles.name");
         
         return [
             "users" => $users,

@@ -128,5 +128,16 @@
                 </div>
             </div>
         </div>
+
+        
+    <script>
+        window.onload=function(){
+            console.log('hello');
+            Echo.channel('close-appointments').listen('CloseAppointments', (e) => {
+                console.log("hello in the channel");
+                console.log(e);
+            });
+        }
+    </script>
     </body>
 </html>

@@ -27,11 +27,13 @@
                         </div>
                         <div>
                             <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                Admins
+                                Users
                             </p>
+                            @foreach ($statistics['users'] as $role => $count)
                             <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                                {{ $statistics['users'] }}
+                                <span class="font-bold">{{ $count }}</span> <span class="text-xs">{{ $role }} </span>    
                             </p>
+                            @endforeach
                         </div>
                     </div>
                 </div>

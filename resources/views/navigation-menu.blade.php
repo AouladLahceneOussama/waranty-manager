@@ -15,12 +15,13 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
+
                     @can('admin')
                     <x-jet-nav-link href="{{ route('user.index') }}" :active="request()->routeIs('user.index')">
                         {{ __('Utilisateurs') }}
-                    @endcan
                     </x-jet-nav-link>
-
+                    @endcan
+                    
                     <x-jet-nav-link href="{{ route('folder.index') }}" :active="request()->routeIs('folder.index')">
                         {{ __('Dossiers') }}
                     </x-jet-nav-link>
@@ -78,6 +79,9 @@
                         </x-jet-dropdown>
                     </div>
                 @endif
+
+                <!-- Notification component -->
+                <livewire:notification.show />
 
                 <!-- Settings Dropdown -->
                 <div class="ml-3 relative">
